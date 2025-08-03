@@ -16,9 +16,9 @@ namespace Book_Store.Configuration
             builder.Property(x => x.Created).HasDefaultValue(DateTime.Now);
             builder.Property(x=>x.CreatedBy).HasMaxLength(10);
             builder.Property(x=>x.UpdateBy).HasMaxLength(10);
-          
 
-            builder.HasMany(x=>x.BookCategory).WithMany(x => x.Books).UsingEntity("Categores_Book");
+
+            builder.HasMany(x => x.BookCategory).WithMany(x => x.Books).UsingEntity("Categores_Book");
             builder.HasOne(x => x.Auther).WithMany(x => x.books).HasForeignKey(x => x.AutherId).OnDelete(DeleteBehavior.Restrict);
             builder.HasMany(x => x.UserBook).WithOne(x => x.Book).HasForeignKey(x => x.BookId).OnDelete(DeleteBehavior.Restrict);
         }

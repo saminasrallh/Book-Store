@@ -1,6 +1,7 @@
 ﻿using Book_Store.DBContext;
 using Book_Store.Entity;
 using Book_Store.IRepostry;
+using Book_Store.Model;
 using Book_Store.Repostory;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
@@ -40,10 +41,10 @@ namespace Book_Store.Repostory
 
         public async Task<Users> DeleteUser(Users user)
         {
-           
-           
-            _Context.Remove(user);
-            _Context.SaveChanges();
+
+
+                  _Context.Users.Remove(user);
+            await _Context.SaveChangesAsync();
             
             return (user);
         }
@@ -107,7 +108,25 @@ namespace Book_Store.Repostory
 
             return (tokenres);
         }
+   
+        public async Task<numberbookfromUser> numberbookfromUser(int id)
+        {
 
-      
+            var number = new numberbookfromUser();
+            var x = await _Context.Users.Where(x => x.Id == id).FirstOrDefaultAsync();
+            if (x == null)
+            {
+                return number=null;
+            }
+
+            number.Fname = x.FName;
+            number.Lname = x.LName;
+            number.CounUuser = _Context.UserBooks.Where(x => x.ReturnTime ==null&&x.UserId==id).Count();
+               
+
+
+            return number;
+        }
+
     }
 }

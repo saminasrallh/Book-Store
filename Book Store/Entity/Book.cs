@@ -25,18 +25,20 @@ namespace Book_Store.Entity
         public Auther Auther { get; set; }
 
         public List<UserBook> UserBook { get; set; }
+
+        public long AvulebelQuantity {  get; set; } 
         // public List <Users> User { get; set; }
 
-        [NotMapped]
-        public long AvailableBookCount
-        {
-            get
-            {
-                return Quantity - UserBook.Where(x => x.ReturnTime == null).LongCount();
+        //  [NotMapped]
+        // public long AvailableBookCount
+        //  {
+        // get
+        // {
+        //  return Quantity - UserBook.Where(x => x.ReturnTime == null).LongCount();
 
 
-            }
-        }
+        //  }
+        //}
 
 
 

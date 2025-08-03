@@ -22,7 +22,7 @@ namespace Book_Store.Controllers
             var getAuther = await _repostory.GetAuther();
             return Ok(getAuther);
         }
-        [HttpGet("GetAutherِAndBook")]
+        [HttpGet("GetallAutherِAndBook")]
         public async Task<IActionResult> GetallAutherAndBook()
         {
             var getAuther = await _repostory.GetAutherِAndBook();

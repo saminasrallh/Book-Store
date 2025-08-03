@@ -1,4 +1,5 @@
 ﻿using Book_Store.Entity;
+using Book_Store.Model;
 using System.Collections;
 
 namespace Book_Store.IRepostry
@@ -14,7 +15,7 @@ namespace Book_Store.IRepostry
        
         Task<IEnumerable<Users>> GetUsersByName(string name);
         Task <IEnumerable> GetToken(string name, string password);
-        
+        Task< numberbookfromUser> numberbookfromUser (int id);
 
     }
 }

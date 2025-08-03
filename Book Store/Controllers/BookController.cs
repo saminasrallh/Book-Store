@@ -39,9 +39,9 @@ namespace Book_Store.Controllers
 
         }
         [HttpGet("GetBookByName")]
-        public async Task<IActionResult> GetBookByName(string name)
+        public async Task<IActionResult> GetBookByName(string Title)
         {
-            var getbook=await _bookRepostory.GetBookByName(name);
+            var getbook=await _bookRepostory.GetBookByName(Title);
             if (getbook != null)
             {
                 return Ok(getbook);
@@ -63,6 +63,7 @@ namespace Book_Store.Controllers
                 Price = book.Price,
                 CreatedBy = book.CreatedBy,
                 AutherId = book.AutherId,
+                AvulebelQuantity=book.Quantity,
                 
                 
             };
@@ -90,6 +91,7 @@ namespace Book_Store.Controllers
             updatebook.Price=book.Price;
             updatebook.UpdateBy=book.UpdateBy;
             updatebook.LastUpdated= DateTime.Now;
+           updatebook.AvulebelQuantity= book.Quantity;
            _bookRepostory.UpdateBook(updatebook);
             
             return Ok(updatebook);

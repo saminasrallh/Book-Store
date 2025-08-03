@@ -69,7 +69,7 @@ namespace Book_Store.Repostory
             var number = _dbContext.Authers.Where(x=>x.Id==id).Select(a => new
             {
                 Fname = a.FName,
-                count = a.books.Count,
+                countBook = a.books.Count,
             });
             
             return number;

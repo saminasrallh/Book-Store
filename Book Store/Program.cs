@@ -1,5 +1,6 @@
 using Book_Store.DBContext;
 using Book_Store.IRepostry;
+using Book_Store.middleware;
 using Book_Store.Repostory;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
@@ -65,11 +66,12 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+app.UseMiddleware<TimeBlock>();
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
 app.MapControllers();
+
 
 app.Run();

@@ -4,6 +4,7 @@ using Book_Store.DBContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Book_Store.Migrations
 {
     [DbContext(typeof(AppDBContext))]
-    partial class AppDBContextModelSnapshot : ModelSnapshot
+    [Migration("20250731111043_tow.")]
+    partial class tow
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -67,7 +70,7 @@ namespace Book_Store.Migrations
                     b.Property<DateTime>("Created")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 7, 31, 16, 49, 13, 423, DateTimeKind.Local).AddTicks(3927));
+                        .HasDefaultValue(new DateTime(2025, 7, 31, 14, 10, 42, 869, DateTimeKind.Local).AddTicks(7273));
 
                     b.Property<string>("CreatedBy")
                         .IsRequired()
@@ -150,7 +153,7 @@ namespace Book_Store.Migrations
                     b.Property<DateTime>("RentalTime")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 7, 31, 16, 49, 13, 424, DateTimeKind.Local).AddTicks(3437));
+                        .HasDefaultValue(new DateTime(2025, 7, 31, 14, 10, 42, 870, DateTimeKind.Local).AddTicks(8002));
 
                     b.Property<DateTime?>("ReturnTime")
                         .HasColumnType("datetime2");
@@ -161,7 +164,7 @@ namespace Book_Store.Migrations
                     b.Property<DateTime>("deadline")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 8, 31, 16, 49, 13, 424, DateTimeKind.Local).AddTicks(3704));
+                        .HasDefaultValue(new DateTime(2025, 8, 31, 14, 10, 42, 870, DateTimeKind.Local).AddTicks(8343));
 
                     b.HasKey("Id");
 
@@ -183,7 +186,7 @@ namespace Book_Store.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 7, 31, 16, 49, 13, 424, DateTimeKind.Local).AddTicks(4919));
+                        .HasDefaultValue(new DateTime(2025, 7, 31, 14, 10, 42, 870, DateTimeKind.Local).AddTicks(9702));
 
                     b.Property<string>("Email")
                         .IsRequired()

@@ -30,7 +30,7 @@ namespace Book_Store.Repostory
 
         public async Task<IEnumerable<UserBook>> getRenyedBooksbybookId(int id)
         {
-           var getbook=await _Context.UserBooks.Include(x => x.Book).Include(x => x.User)
+           var getbook=await _Context.UserBooks.Include(x => x.Book).Include(x => x.User).AsNoTracking()
                .Where(x=>x.BookId==id && x.ReturnTime==null).ToListAsync();
             return getbook;
         }
@@ -42,9 +42,11 @@ namespace Book_Store.Repostory
             return getuser;
         }
 
-        public async Task<UserBook> create(UserBook userBook)
+        public async Task<UserBook> create(UserBook userBook, Book book)
         {
-           _Context.UserBooks.AddAsync(userBook);
+           
+            await _Context.UserBooks.AddAsync(userBook);
+            _Context.Books.Update(book);
             _Context.SaveChanges();
             return userBook;
 
@@ -54,13 +56,20 @@ namespace Book_Store.Repostory
 
         public async Task<object> RetarnBook(UserBook userBook)
         {
-          
+            userBook.Book = null;
             _Context.UserBooks.Update(userBook);
-            _Context.SaveChanges();
+            await _Context.SaveChangesAsync();
 
             return userBook;
         }
+        public async Task<object>UpdaetQuantity(Book book)
+        {
+            book.UserBook = null;
+            _Context.Books.Update(book);
+           await _Context.SaveChangesAsync();
 
+            return book;
+        }
     
         
     }

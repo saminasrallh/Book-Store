@@ -2,6 +2,7 @@
 using Book_Store.IRepostry;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Net;
 
 namespace Book_Store.Controllers
 {
@@ -13,13 +14,15 @@ namespace Book_Store.Controllers
     {
         private readonly IUserBookRepostory _userBookRepostory ;
         private readonly IBookRepostory _bookRepostory ;
-
+        private readonly IUserRepostry _userRepostry ;
        
 
-        public UserBookController(IUserBookRepostory userBookRepostory, IBookRepostory bookRepostory)
+        public UserBookController(IUserBookRepostory userBookRepostory,
+            IBookRepostory bookRepostory,IUserRepostry userRepostry)
         {
             _userBookRepostory = userBookRepostory;
             _bookRepostory = bookRepostory;
+            _userRepostry = userRepostry;
         }
         [HttpGet("getall")]
         public async Task<IActionResult> getall()
@@ -40,7 +43,7 @@ namespace Book_Store.Controllers
         public async Task <IActionResult> getRenyedBooksbybookId(int id)
         {
 
-           var get= _userBookRepostory.getRenyedBooksbybookId(id);
+           var get=await _userBookRepostory.getRenyedBooksbybookId(id);
             if (get == null) {
                 return BadRequest("No Book Rental");
             }
@@ -50,30 +53,48 @@ namespace Book_Store.Controllers
         
         public async Task<IActionResult>create(int userid, int bookid)
         {
-           var getbook= await _bookRepostory.GetBookByID(bookid);
-           if((getbook.Quantity -getbook.AvailableBookCount)>1)
+           var getbook = await _bookRepostory.GetBookByID(bookid);
+            var getuser=await _userRepostry.numberbookfromUser(userid);
+            if(getbook ==null )
             {
-                return Ok("The Book Not Avelubel");
+                return BadRequest("the User or book not found");
+            }
+            if (getuser.CounUuser > 3)
+            {
+                return BadRequest("The user Execuod The Alloed Limaet ");
+            }
+          
+           if (getbook.AvulebelQuantity <1 )
+            {
+                return BadRequest("The Book Not Avelubel");
             }
             var create = new UserBook
             {
                 UserId = userid,
                 BookId = bookid
             };
-
-            _userBookRepostory.create(create);
+            getbook.AvulebelQuantity = getbook.AvulebelQuantity - 1;
+            
+            _userBookRepostory.create(create, getbook);
             return Ok(create);
         }
         [HttpPut("ReturnBook")]
         public async Task <IActionResult>ReturnBook(int id)
         {
-            var get = new UserBook();
-               get=await _userBookRepostory.GetById(id);
+           
+            var get=await _userBookRepostory.GetById(id);
+
+            var getbook = await _bookRepostory.GetBookByID(get.BookId);
+
             get.ReturnTime = DateTime.Now;
-           await _userBookRepostory.RetarnBook(get);
+            getbook.AvulebelQuantity = getbook.AvulebelQuantity +1;
+            await _userBookRepostory.RetarnBook(get);
+            await _userBookRepostory.UpdaetQuantity(getbook);
+
             return Ok(get);
             
         }
+
 
 
     }

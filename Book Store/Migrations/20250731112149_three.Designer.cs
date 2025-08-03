@@ -4,6 +4,7 @@ using Book_Store.DBContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Book_Store.Migrations
 {
     [DbContext(typeof(AppDBContext))]
-    partial class AppDBContextModelSnapshot : ModelSnapshot
+    [Migration("20250731112149_three")]
+    partial class three
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -67,7 +70,7 @@ namespace Book_Store.Migrations
                     b.Property<DateTime>("Created")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 7, 31, 16, 49, 13, 423, DateTimeKind.Local).AddTicks(3927));
+                        .HasDefaultValue(new DateTime(2025, 7, 31, 14, 21, 49, 307, DateTimeKind.Local).AddTicks(6236));
 
                     b.Property<string>("CreatedBy")
                         .IsRequired()
@@ -150,7 +153,7 @@ namespace Book_Store.Migrations
                     b.Property<DateTime>("RentalTime")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 7, 31, 16, 49, 13, 424, DateTimeKind.Local).AddTicks(3437));
+                        .HasDefaultValue(new DateTime(2025, 7, 31, 14, 21, 49, 308, DateTimeKind.Local).AddTicks(7344));
 
                     b.Property<DateTime?>("ReturnTime")
                         .HasColumnType("datetime2");
@@ -161,7 +164,7 @@ namespace Book_Store.Migrations
                     b.Property<DateTime>("deadline")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 8, 31, 16, 49, 13, 424, DateTimeKind.Local).AddTicks(3704));
+                        .HasDefaultValue(new DateTime(2025, 8, 31, 14, 21, 49, 308, DateTimeKind.Local).AddTicks(7673));
 
                     b.HasKey("Id");
 
@@ -183,7 +186,7 @@ namespace Book_Store.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 7, 31, 16, 49, 13, 424, DateTimeKind.Local).AddTicks(4919));
+                        .HasDefaultValue(new DateTime(2025, 7, 31, 14, 21, 49, 308, DateTimeKind.Local).AddTicks(9104));
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -250,8 +253,7 @@ namespace Book_Store.Migrations
                 {
                     b.HasOne("Book_Store.Entity.Auther", "Auther")
                         .WithMany("books")
-                        .HasForeignKey("AutherId")
-                        .OnDelete(DeleteBehavior.SetNull);
+                        .HasForeignKey("AutherId");
 
                     b.Navigation("Auther");
                 });
@@ -261,13 +263,13 @@ namespace Book_Store.Migrations
                     b.HasOne("Book_Store.Entity.Book", "Book")
                         .WithMany("UserBook")
                         .HasForeignKey("BookId")
-                        .OnDelete(DeleteBehavior.SetNull)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Book_Store.Entity.Users", "User")
                         .WithMany("UserBooks")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.SetNull)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Book");

@@ -41,7 +41,7 @@ namespace Book_Store.Controllers
             }
             else
             {
-                return Ok("not found");
+                return BadRequest("not found");
             }
            return Ok(getbook);
 
@@ -56,7 +56,7 @@ namespace Book_Store.Controllers
             }
             else
             {
-                return Ok("not found");
+                return BadRequest("not found");
             }
         }
         [HttpGet("numberbookfromcategory")]

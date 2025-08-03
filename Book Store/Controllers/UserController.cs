@@ -25,7 +25,7 @@ namespace Book_Store.Controllers
         {
             _UserRepostry = userRepostry;
         }
-        //[Authorize]
+       // [Authorize]
         [HttpGet("getalluser")]
        
         public async Task<IActionResult> getalluser()
@@ -51,7 +51,7 @@ namespace Book_Store.Controllers
         
 
         [HttpGet("getUserbyName")]
-        // [Authorize (Roles = "employee")]
+       // [Authorize (Roles = "employee")]
         public async Task<IActionResult> getUserbyName(string name)
         {
             var user = await _UserRepostry.GetUsersByName(name);
@@ -120,6 +120,12 @@ namespace Book_Store.Controllers
         {
            var token=await _UserRepostry.GetToken(username, password);
             return Ok(token);
+        }
+        [HttpGet("numberbookfromUser")]
+        public async Task<IActionResult> numberbookfromUser(int id)
+        {
+           var x= await _UserRepostry.numberbookfromUser(id);
+            return Ok(x);
         }
 
     }

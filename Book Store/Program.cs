@@ -1,7 +1,9 @@
 using Book_Store.DBContext;
 using Book_Store.IRepostry;
+using Book_Store.IServices;
 using Book_Store.middleware;
 using Book_Store.Repostory;
+using Book_Store.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -27,7 +29,11 @@ builder.Services.AddTransient<IBookRepostory, BookRepostory>();
 builder.Services.AddTransient<ICategoryRepostory,CategoryReposory>();
 builder.Services.AddTransient<IAutherRepostory, AutherRepostory>();
 builder.Services.AddTransient<IUserBookRepostory, UserBookRepostory>();
-
+builder.Services.AddTransient<IAutherServices,AutherServices>();
+builder.Services.AddTransient<IBookServices,BookServices>();
+builder.Services.AddTransient<ICategoryServices, CategoryServices>();
+builder.Services.AddTransient<IUserBookServices, UserBookServices>();
+builder.Services.AddTransient<IUserServices, UserServices>();
 
 
 

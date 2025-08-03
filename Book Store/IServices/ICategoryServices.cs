@@ -9,9 +9,9 @@ namespace Book_Store.IServices
 
         Task<Category> GetCategoryById(int id);
         Task<Category> GetCategoryByName(string name);
-        Task<Category> CreateCategory(Category category);
-        Task<Category> UpdateCategory(Category category);
-        Task<Category> DeleteCategory(Category category);
+        Task<Category> CreateCategory(string category);
+        Task<Category> UpdateCategory(int id,string category);
+        Task<Category> DeleteCategory(int id);
         public object numberbookfromcategory(int id);
     }
 }

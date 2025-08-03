@@ -1,4 +1,5 @@
 ﻿using Book_Store.Entity;
+using Book_Store.Model;
 
 namespace Book_Store.IServices
 {
@@ -8,10 +9,11 @@ namespace Book_Store.IServices
         Task<IEnumerable<Auther>> GetAutherِAndBook();
         Task<Auther> GetAutherByID(int id);
 
-        Task<Auther> CreateAuther(Auther auther);
-        Task<Auther> UpdateAuther(Auther auther);
-        Task<Auther> DeleteAuther(Auther auther);
+        Task<Auther> CreateAuther(AutherModel auther);
+        Task<Auther> UpdateAuther(int id, AutherModel auther);
+        Task<Auther> DeleteAuther(int id);
         Task<Auther> GetAutherByName(string name);
         public object numberbookfromauther(int id);
+       
     }
 }

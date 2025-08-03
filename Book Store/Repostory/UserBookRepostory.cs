@@ -46,8 +46,8 @@ namespace Book_Store.Repostory
         {
            
             await _Context.UserBooks.AddAsync(userBook);
-            _Context.Books.Update(book);
-            _Context.SaveChanges();
+                  _Context.Books.Update(book);
+            await _Context.SaveChangesAsync();
             return userBook;
 
         }

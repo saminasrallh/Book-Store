@@ -1,5 +1,6 @@
 ﻿using Book_Store.Entity;
 using Book_Store.IRepostry;
+using Book_Store.IServices;
 using Book_Store.Model;
 using Book_Store.Repostory;
 using Microsoft.AspNetCore.Http;
@@ -11,22 +12,23 @@ namespace Book_Store.Controllers
     [ApiController]
     public class CategoryController : ControllerBase
     {
-        private readonly ICategoryRepostory _bookCategoryRepostory;
+       private readonly ICategoryServices _services;
 
-        public CategoryController(ICategoryRepostory bookCategoryRepostory)
+        public CategoryController(ICategoryServices services)
         {
-            _bookCategoryRepostory = bookCategoryRepostory;
+            _services = services;
         }
+
         [HttpGet("getallcategory")]
         public async Task<IActionResult> GetallCategory()
         {
-            var getbook = await _bookCategoryRepostory.GetAllCategory();
+            var getbook = await _services.GetAllCategory();
             return Ok(getbook);
         }
         [HttpGet("GetAllCategoryAndBook")]
         public async Task<IActionResult> GetAllCategoryAndBook()
         {
-            var getbook = await _bookCategoryRepostory.GetAllCategoryAndBook();
+            var getbook = await _services.GetAllCategoryAndBook();
             return Ok(getbook);
         }
 
@@ -34,55 +36,36 @@ namespace Book_Store.Controllers
         [HttpGet("getCategorybyid")]
         public async Task<IActionResult> getCategorybyid(int id)
         {
-            var getbook = await _bookCategoryRepostory.GetCategoryById(id);
-            if (getbook != null)
-            {
-                return Ok(getbook);
-            }
-            else
-            {
-                return BadRequest("not found");
-            }
+            var getbook = await _services.GetCategoryById(id);
+      
            return Ok(getbook);
 
         }
         [HttpGet("GetCategoryByName")]
         public async Task<IActionResult> GetCategoryByName(string name)
         {
-            var getbook = await _bookCategoryRepostory.GetCategoryByName(name);
-            if (getbook != null)
-            {
-                return Ok(getbook);
-            }
-            else
-            {
-                return BadRequest("not found");
-            }
+            var getbook = await _services.GetCategoryByName(name);
+            return Ok(getbook);
         }
         [HttpGet("numberbookfromcategory")]
         public object numberbookfromcategory(int id)
         {
-            return _bookCategoryRepostory.numberbookfromcategory(id);
+            return _services.numberbookfromcategory(id);
         }
 
         [HttpPost("CreateCategory")]
         public async Task<IActionResult> CreateCategory(string category)
         {
-            var create = new Category
-            {
-                Name=category
-
-
-            };
-            await _bookCategoryRepostory.CreateCategory(create);
+           
+           var create= await _services.CreateCategory(category);
             return Ok(create);
 
         }
         [HttpDelete("DeleteCategory")]
         public async Task<IActionResult> DeleteCategory(int id)
         {
-            var delete = await _bookCategoryRepostory.GetCategoryById(id);
-            _bookCategoryRepostory.DeleteCategory(delete);
+          
+          var delete= await _services.DeleteCategory(id);
             return Ok(delete);
 
         }
@@ -90,12 +73,8 @@ namespace Book_Store.Controllers
         public async Task<IActionResult> UpdateCategory(int id, string category)
 
         {
-            var updatecatigory = await _bookCategoryRepostory.GetCategoryById(id);
-             
-            updatecatigory.Name = category;
-            _bookCategoryRepostory.UpdateCategory(updatecatigory);
-
-            return Ok(updatecatigory);
+           var update= await _services.UpdateCategory(id, category);
+            return Ok(update);
         }
        
 

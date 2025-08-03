@@ -1,6 +1,7 @@
 ﻿using Book_Store.Entity;
 using Book_Store.IRepostry;
 using Book_Store.IServices;
+using Book_Store.Model;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.VisualBasic;
 using System.Linq;
@@ -19,8 +20,9 @@ namespace Book_Store.Services
 
         public async Task<IEnumerable<Auther>> GetAuther()
         {
-           var GetAuther= await _autherRepostory.GetAuther();
+          
             try {
+                var GetAuther = await _autherRepostory.GetAuther();
                 return  GetAuther.ToList(); 
             }
             catch(Exception ex) {
@@ -39,47 +41,103 @@ namespace Book_Store.Services
                 throw new ApplicationException($"Error: {ex.Message}");
             }
         }
-        public Task<Auther> GetAutherByName(string name)
+        public Task<IEnumerable<Auther>> GetAutherِAndBook()
         {
-            var getauther=_autherRepostory.GetAutherByName(name);
             try
             {
+                var getAuther = _autherRepostory.GetAutherِAndBook();
+                return (getAuther);
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException($"Error: {ex.Message}");
+            }
+        }
+        public Task<Auther> GetAutherByName(string name)
+        {
+           
+            try
+            {
+                var getauther = _autherRepostory.GetAutherByName(name);
                 return getauther;
             }
             catch (Exception ex) {
                 throw new ApplicationException($"Error: {ex.Message}");
             }
-        }
-        public async Task<Auther> CreateAuther(Auther auther)
-        {
-            throw new NotImplementedException();
 
         }
-
-        public Task<Auther> DeleteAuther(Auther auther)
-        {
-            throw new NotImplementedException();
-        }
-
-       
-
-      
-
-       
-
-        public Task<IEnumerable<Auther>> GetAutherِAndBook()
-        {
-            throw new NotImplementedException();
-        }
-
         public object numberbookfromauther(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return _autherRepostory.numberbookfromauther(id);
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException($"Error: {ex.Message}");
+            }
+        }
+        public async Task<Auther> CreateAuther(AutherModel auther)
+        {
+            try
+            {
+                var create = new Auther
+                {
+                    FName = auther.FName,
+                    LName = auther.LName,
+                    Country = auther.Country,
+                    BirthDay = auther.BirthDay,
+
+
+                };
+                await _autherRepostory.CreateAuther(create);
+                return (create);
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException($"Error: {ex.Message}");
+            }
+
+            }
+
+        public async Task<Auther> DeleteAuther(int id)
+        {
+            try
+            {
+                var delete = await _autherRepostory.GetAutherByID(id);
+                _autherRepostory.DeleteAuther(delete);
+                return (delete);
+
+            }
+            catch (Exception ex)
+            {
+               throw new ApplicationException($"Error: {ex.Message}");
+            }
         }
 
-        public Task<Auther> UpdateAuther(Auther auther)
+
+        public async Task<Auther> UpdateAuther(int id, AutherModel auther)
         {
-            throw new NotImplementedException();
+            try
+            {
+
+                var update = await _autherRepostory.GetAutherByID(id);
+
+                update.FName = auther.FName;
+                update.LName = auther.LName;
+                update.Country = auther.Country;
+                update.BirthDay = auther.BirthDay;
+
+
+
+                _autherRepostory.UpdateAuther(update);
+
+                return (update);
+            }
+            catch (Exception ex) 
+            {
+                throw new ApplicationException($"Error: {ex.Message}");
+            }
         }
     }
 }

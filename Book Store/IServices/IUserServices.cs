@@ -9,12 +9,12 @@ namespace Book_Store.IServices
         Task<IEnumerable<Users>> GetUsers();
         Task<Users> GetUsersByID(int id);
 
-        Task<Users> CreateUser(Users user);
-        Task<Users> UpdateUser(Users user);
-        Task<Users> DeleteUser(Users users);
+        Task<Users> CreateUser(Usermodel user);
+        Task<Users> UpdateUser(int id,Usermodel user);
+        Task<Users> DeleteUser(int id);
 
         Task<IEnumerable<Users>> GetUsersByName(string name);
-        Task<IEnumerable> GetToken(string name, string password);
+        Task<IEnumerable> GetToken(string username, string password);
         Task<numberbookfromUser> numberbookfromUser(int id);
     }
 }

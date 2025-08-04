@@ -21,6 +21,10 @@ namespace Book_Store.Services
             try
             {
                 var alluser = await _UserRepostry.GetUsers();
+                if (alluser == null)
+                {
+                    throw new ApplicationException($"Error: {"The User Not Found"}");
+                }
                 return (alluser);
             }
             catch (Exception ex)
@@ -33,6 +37,10 @@ namespace Book_Store.Services
             try
             {
                 var user = await _UserRepostry.GetUsersByID(id);
+                if (user == null)
+                {
+                    throw new ApplicationException($"Error: {"The User Not Found"}");
+                }
                 return user;
             } catch (Exception ex) {
                 throw new ApplicationException($"Error: {ex.Message}");
@@ -43,6 +51,10 @@ namespace Book_Store.Services
             try
             {
                 var user = await _UserRepostry.GetUsersByName(name);
+                if (user == null)
+                {
+                    throw new ApplicationException($"Error: {"The User Not Found"}");
+                }
                 return user;
             }
             catch (Exception ex)
@@ -79,6 +91,10 @@ namespace Book_Store.Services
             try
             {
                 var userdelete = await _UserRepostry.GetUsersByID(id);
+                if (userdelete == null)
+                {
+                    throw new ApplicationException($"Error: {"The User Not Found"}");
+                }
                 _UserRepostry.DeleteUser(userdelete);
 
                 return (userdelete);

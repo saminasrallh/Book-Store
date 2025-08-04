@@ -17,8 +17,12 @@ namespace Book_Store.Services
         {
             try
             {
-                var getbook = await _categoryRepostory.GetAllCategory();
-                return (getbook);
+                var getCategory = await _categoryRepostory.GetAllCategory();
+                if (getCategory == null)
+                {
+                    throw new ApplicationException($"Error: {"The Categore Not Found"}");
+                }
+                return (getCategory);
             }
             catch (Exception ex) {
                 throw new ApplicationException($"Error: {ex.Message}");
@@ -29,8 +33,12 @@ namespace Book_Store.Services
         {
             try
             {
-                var getbook = await _categoryRepostory.GetAllCategoryAndBook();
-                return (getbook);
+                var getCategory = await _categoryRepostory.GetAllCategoryAndBook();
+                if (getCategory == null)
+                {
+                    throw new ApplicationException($"Error: {"The Categore Not Found"}");
+                }
+                return (getCategory);
             }
             catch (Exception ex)
             {
@@ -42,8 +50,12 @@ namespace Book_Store.Services
         {
             try
             {
-                var getbook = await _categoryRepostory.GetCategoryById(id);
-                return (getbook);
+                var getCategory = await _categoryRepostory.GetCategoryById(id);
+                if (getCategory == null)
+                {
+                    throw new ApplicationException($"Error: {"The Categore Not Found"}");
+                }
+                return (getCategory);
             }
             catch (Exception ex)
             {
@@ -55,8 +67,12 @@ namespace Book_Store.Services
         {
             try
             {
-                var getbook = await _categoryRepostory.GetCategoryByName(name);
-                return (getbook);
+                var getCategory = await _categoryRepostory.GetCategoryByName(name);
+                if (getCategory == null)
+                {
+                    throw new ApplicationException($"Error: {"The Categore Not Found"}");
+                }
+                return (getCategory);
             }
             catch (Exception ex)
             {
@@ -100,6 +116,10 @@ namespace Book_Store.Services
             try
             {
                 var delete = await _categoryRepostory.GetCategoryById(id);
+                if (delete == null)
+                {
+                    throw new ApplicationException($"Error: {"The Categore Not Found"}");
+                }
                 _categoryRepostory.DeleteCategory(delete);
                 return (delete);
             }

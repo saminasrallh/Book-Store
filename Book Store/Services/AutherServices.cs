@@ -23,10 +23,13 @@ namespace Book_Store.Services
           
             try {
                 var GetAuther = await _autherRepostory.GetAuther();
+                if (GetAuther == null) {
+                    throw new ApplicationException($"Error: {"The Auther Not Found"}");
+                }
                 return  GetAuther.ToList(); 
             }
             catch(Exception ex) {
-                return (IEnumerable<Auther>)($"Error: {ex.Message}").ToList();
+                throw new ApplicationException($"Error: {ex.Message}");
             }
         }
         public Task<Auther> GetAutherByID(int id)
@@ -34,6 +37,10 @@ namespace Book_Store.Services
             try
             {
                 var getAuther =  _autherRepostory.GetAutherByID(id);
+                if(getAuther==null)
+                {
+                    throw new ApplicationException($"Error: {"The Auther Not Found"}");
+                }
             
                 return getAuther ;
             }
@@ -46,6 +53,10 @@ namespace Book_Store.Services
             try
             {
                 var getAuther = _autherRepostory.GetAutherِAndBook();
+                if (getAuther == null)
+                {
+                    throw new ApplicationException($"Error: {"The Auther Not Found"}");
+                }
                 return (getAuther);
             }
             catch (Exception ex)
@@ -59,6 +70,12 @@ namespace Book_Store.Services
             try
             {
                 var getauther = _autherRepostory.GetAutherByName(name);
+                if (getauther == null)
+                {
+                    throw new ApplicationException($"Error: {"The Auther Not Found"}");
+                   
+
+                }
                 return getauther;
             }
             catch (Exception ex) {
@@ -105,6 +122,10 @@ namespace Book_Store.Services
             try
             {
                 var delete = await _autherRepostory.GetAutherByID(id);
+                if (delete == null)
+                {
+                    throw new ApplicationException($"Error: {"The Auther Not Found"}");
+                }
                 _autherRepostory.DeleteAuther(delete);
                 return (delete);
 
@@ -122,6 +143,10 @@ namespace Book_Store.Services
             {
 
                 var update = await _autherRepostory.GetAutherByID(id);
+                if (update == null)
+                {
+                    throw new ApplicationException($"Error: {"The Auther Not Found"}");
+                }
 
                 update.FName = auther.FName;
                 update.LName = auther.LName;

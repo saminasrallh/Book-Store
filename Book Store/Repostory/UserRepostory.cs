@@ -121,7 +121,7 @@ namespace Book_Store.Repostory
 
             number.Fname = x.FName;
             number.Lname = x.LName;
-            number.CounUuser = _Context.UserBooks.Where(x => x.ReturnTime ==null&&x.UserId==id).Count();
+            number.CountUuser = _Context.UserBooks.Where(x => x.ReturnTime ==null&&x.UserId==id).Count();
                
 
 

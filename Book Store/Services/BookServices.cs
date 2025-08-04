@@ -18,6 +18,10 @@ namespace Book_Store.Services
             try
             {
                 var getbook = await _bookRepostory.GetallBook();
+                if (getbook == null)
+                {
+                    throw new ApplicationException($"Error: {"The Book Not Found"}");
+                }
                 return getbook;
             }
             catch (Exception ex) {
@@ -30,6 +34,10 @@ namespace Book_Store.Services
             try
             {
                 var getbook = await _bookRepostory.GetBookByID(id);
+                if (getbook == null)
+                {
+                    throw new ApplicationException($"Error: {"The Book Not Found"}");
+                }
                 return getbook;
             }
             catch (Exception ex)
@@ -43,6 +51,10 @@ namespace Book_Store.Services
             try
             {
                 var getbook = await _bookRepostory.GetBookByName(name);
+                if (getbook == null)
+                {
+                    throw new ApplicationException($"Error: {"The Book Not Found"}");
+                }
                 return getbook;
             }
             catch (Exception ex)
@@ -67,6 +79,10 @@ namespace Book_Store.Services
 
 
                 };
+                if (create.AutherId == null||create.AutherId==0)
+                {
+                    throw new ApplicationException($"Error: {"The Auther Not Found"}");
+                }
                 await _bookRepostory.CreateBook(create);
                 return (create);
             }
@@ -81,6 +97,10 @@ namespace Book_Store.Services
             try
             {
                 var delete = await _bookRepostory.GetBookByID(id);
+                if (delete == null)
+                {
+                    throw new ApplicationException($"Error: {"The Book Not Found"}");
+                }
                 _bookRepostory.DeleteBook(delete);
                 return (delete);
             }
@@ -97,6 +117,10 @@ namespace Book_Store.Services
             {
 
                 var updatebook = await _bookRepostory.GetBookByID(id);
+                if (updatebook == null)
+                {
+                    throw new ApplicationException($"Error: {"The Book Not Found"}");
+                }
 
                 updatebook.Title = book.Title;
                 updatebook.Description = book.Description;

@@ -24,6 +24,10 @@ namespace Book_Store.Services
             try
             {
                 var get = await _userBookRepostory.getallRenter();
+                if(get == null)
+                {
+                    throw new ApplicationException($"Error: {"No Book Rental"}");
+                }
                 return (get);
             }
             catch (Exception ex)
@@ -36,6 +40,10 @@ namespace Book_Store.Services
             try
             {
                 var get = await _userBookRepostory.getRenyedBooksbyUserId(id);
+                if (get == null)
+                {
+                    throw new ApplicationException($"Error: {"The User Not Found"}");
+                }
                 return get;
             }
             catch (Exception ex)
@@ -49,6 +57,10 @@ namespace Book_Store.Services
             try
             {
                 var get = await _userBookRepostory.getRenyedBooksbybookId(id);
+                if (get == null)
+                {
+                    throw new ApplicationException($"Error: {"The Book Not Found"}");
+                }
                 return get;
             }
             catch (Exception ex)
@@ -62,8 +74,21 @@ namespace Book_Store.Services
             {
                 var getbook = await _bookRepostory.GetBookByID(bookid);
                 var getuser = await _userRepostry.numberbookfromUser(userid);
-              
-             
+                if (getbook == null || getuser == null)
+                {
+                    throw new ApplicationException($"Error: {"The Book Or User Not Found"}");
+                }
+               
+                if (getuser.CountUuser > 3 ) {
+                  throw  new ApplicationException($"Error: {"The Book Not Avelabel"}"); 
+                   
+                }
+                if (getbook.AvulebelQuantity < 1)
+                {
+                    throw new ApplicationException($"Error: {"The Book Not Avelabel"}"); 
+                }
+
+
                 var create = new UserBook
                 {
                     UserId = userid,
@@ -90,6 +115,10 @@ namespace Book_Store.Services
             try
             {
                 var getbyid = await _userBookRepostory.GetById(id);
+                if (getbyid == null)
+                {
+                    throw new ApplicationException($"Error: {"The Book Not Found"}");
+                }
                 return getbyid;
             }
             catch (Exception ex)
@@ -103,6 +132,10 @@ namespace Book_Store.Services
             try
             {
                 var get = await _userBookRepostory.GetById(id);
+                if(get.ReturnTime != null)
+                {
+                    throw new ApplicationException($"Error: {"The Book its Retarn"}");
+                }
 
                 var getbook = await _bookRepostory.GetBookByID(get.BookId);
 

@@ -29,7 +29,7 @@ namespace Book_Store.Services
             }
             catch (Exception ex)
             {
-                throw new ApplicationException($"Error: {ex.Message}");
+                throw new ApplicationException($" {ex.Message}");
             }
         }
         public async Task<Users> GetUsersByID(int id)
@@ -43,7 +43,7 @@ namespace Book_Store.Services
                 }
                 return user;
             } catch (Exception ex) {
-                throw new ApplicationException($"Error: {ex.Message}");
+                throw new ApplicationException($" {ex.Message}");
             }
         }
         public async Task<IEnumerable<Users>> GetUsersByName(string name)
@@ -51,7 +51,7 @@ namespace Book_Store.Services
             try
             {
                 var user = await _UserRepostry.GetUsersByName(name);
-                if (user == null)
+                if (user.Count() == 0)
                 {
                     throw new ApplicationException($"Error: {"The User Not Found"}");
                 }
@@ -59,7 +59,7 @@ namespace Book_Store.Services
             }
             catch (Exception ex)
             {
-                throw new ApplicationException($"Error: {ex.Message}");
+                throw new ApplicationException($" {ex.Message}");
             }
             }
         public async Task<Users> CreateUser(Usermodel user)
@@ -82,7 +82,7 @@ namespace Book_Store.Services
             }
             catch (Exception ex)
             {
-                throw new ApplicationException($"Error: {ex.Message}");
+                throw new ApplicationException($" {ex.Message}");
             }
             }
 
@@ -101,7 +101,7 @@ namespace Book_Store.Services
             }
             catch (Exception ex)
             {
-                throw new ApplicationException($"Error: {ex.Message}");
+                throw new ApplicationException($" {ex.Message}");
             }
             }
 

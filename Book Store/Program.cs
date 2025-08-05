@@ -1,3 +1,4 @@
+using Serilog;
 using Book_Store.DBContext;
 using Book_Store.IRepostry;
 using Book_Store.IServices;
@@ -17,12 +18,15 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers().AddJsonOptions(options =>
 {
     options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+   
+
 });
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<AppDBContext>(options=>
 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
 
 builder.Services.AddTransient<IUserRepostry, UserRepostory>();
 builder.Services.AddTransient<IBookRepostory, BookRepostory>();
@@ -35,6 +39,11 @@ builder.Services.AddTransient<ICategoryServices, CategoryServices>();
 builder.Services.AddTransient<IUserBookServices, UserBookServices>();
 builder.Services.AddTransient<IUserServices, UserServices>();
 
+
+builder.Host.UseSerilog((context, configuration) =>
+     configuration.ReadFrom.Configuration(context.Configuration));
+
+builder.Logging.AddSerilog();
 
 
 var jwtSettings = builder.Configuration.GetSection("Jwt");
@@ -58,6 +67,7 @@ builder.Services.AddAuthentication(options =>
         IssuerSigningKey = new SymmetricSecurityKey(key)
     };
 });
+
 builder.Services.AddAuthorization();
 builder.Services.AddRazorPages();
 
@@ -72,7 +82,12 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+app.UseStaticFiles();
+app.UseSerilogRequestLogging();
+
 app.UseMiddleware<TimeBlock>();
+app.UseMiddleware<ExceptionMiddleware>();
+
 app.UseHttpsRedirection();
 
 app.UseAuthorization();

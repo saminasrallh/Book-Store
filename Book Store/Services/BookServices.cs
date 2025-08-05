@@ -1,4 +1,7 @@
-﻿using Book_Store.Entity;
+﻿
+
+
+using Book_Store.Entity;
 using Book_Store.IRepostry;
 using Book_Store.IServices;
 using Book_Store.Model;
@@ -25,7 +28,7 @@ namespace Book_Store.Services
                 return getbook;
             }
             catch (Exception ex) {
-                throw new ApplicationException($"Error: {ex.Message}");
+                throw new ApplicationException($" {ex.Message}");
             }
         }
 
@@ -36,13 +39,13 @@ namespace Book_Store.Services
                 var getbook = await _bookRepostory.GetBookByID(id);
                 if (getbook == null)
                 {
-                    throw new ApplicationException($"Error: {"The Book Not Found"}");
+                    throw new ApplicationException($" {"The Book Not Found"}");
                 }
                 return getbook;
             }
             catch (Exception ex)
             {
-                throw new ApplicationException($"Error: {ex.Message}");
+                throw new ApplicationException($" {ex.Message}");
             }
             }
 
@@ -53,13 +56,13 @@ namespace Book_Store.Services
                 var getbook = await _bookRepostory.GetBookByName(name);
                 if (getbook == null)
                 {
-                    throw new ApplicationException($"Error: {"The Book Not Found"}");
+                    throw new ApplicationException($" {"The Book Not Found"}");
                 }
                 return getbook;
             }
             catch (Exception ex)
             {
-                throw new ApplicationException($"Error: {ex.Message}");
+                throw new ApplicationException($" {ex.Message}");
             }
             }
         public async Task<Book> CreateBook(BookModelCreate book)
@@ -88,7 +91,7 @@ namespace Book_Store.Services
             }
             catch (Exception ex)
             {
-                throw new ApplicationException($"Error: {ex.Message}");
+                throw new ApplicationException($" {ex.Message}");
             }
             }
 
@@ -106,7 +109,7 @@ namespace Book_Store.Services
             }
             catch (Exception ex)
             {
-                throw new ApplicationException($"Error: {ex.Message}");
+                throw new ApplicationException($" {ex.Message}");
             }
             }
 
@@ -134,7 +137,7 @@ namespace Book_Store.Services
                 return (updatebook);
             }
             catch (Exception ex) {
-                throw new ApplicationException($"Error: {ex.Message}");
+                throw new ApplicationException($" {ex.Message}");
             }
         }
     }

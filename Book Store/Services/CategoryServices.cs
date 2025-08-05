@@ -25,7 +25,7 @@ namespace Book_Store.Services
                 return (getCategory);
             }
             catch (Exception ex) {
-                throw new ApplicationException($"Error: {ex.Message}");
+                throw new ApplicationException($" {ex.Message}");
             }
         }
 
@@ -42,7 +42,7 @@ namespace Book_Store.Services
             }
             catch (Exception ex)
             {
-                throw new ApplicationException($"Error: {ex.Message}");
+                throw new ApplicationException($" {ex.Message}");
             }
          }
 
@@ -59,7 +59,7 @@ namespace Book_Store.Services
             }
             catch (Exception ex)
             {
-                throw new ApplicationException($"Error: {ex.Message}");
+                throw new ApplicationException($" {ex.Message}");
             }
         }
 
@@ -76,7 +76,7 @@ namespace Book_Store.Services
             }
             catch (Exception ex)
             {
-                throw new ApplicationException($"Error: {ex.Message}");
+                throw new ApplicationException($" {ex.Message}");
             }
         }
 
@@ -125,7 +125,7 @@ namespace Book_Store.Services
             }
             catch (Exception ex)
             {
-                throw new ApplicationException($"Error: {ex.Message}");
+                throw new ApplicationException($" {ex.Message}");
             }
             }
 

@@ -32,11 +32,11 @@ namespace Book_Store.Services
                 throw new ApplicationException($"Error: {ex.Message}");
             }
         }
-        public Task<Auther> GetAutherByID(int id)
+        public async Task<Auther> GetAutherByID(int id)
         {
             try
             {
-                var getAuther =  _autherRepostory.GetAutherByID(id);
+                var getAuther =await _autherRepostory.GetAutherByID(id);
                 if(getAuther==null)
                 {
                     throw new ApplicationException($"Error: {"The Auther Not Found"}");
@@ -45,14 +45,14 @@ namespace Book_Store.Services
                 return getAuther ;
             }
             catch (Exception ex) {
-                throw new ApplicationException($"Error: {ex.Message}");
+                throw new ApplicationException($" {ex.Message}");
             }
         }
-        public Task<IEnumerable<Auther>> GetAutherِAndBook()
+        public async Task<IEnumerable<Auther>> GetAutherِAndBook()
         {
             try
             {
-                var getAuther = _autherRepostory.GetAutherِAndBook();
+                var getAuther =await _autherRepostory.GetAutherِAndBook();
                 if (getAuther == null)
                 {
                     throw new ApplicationException($"Error: {"The Auther Not Found"}");
@@ -61,15 +61,15 @@ namespace Book_Store.Services
             }
             catch (Exception ex)
             {
-                throw new ApplicationException($"Error: {ex.Message}");
+                throw new ApplicationException($" {ex.Message}");
             }
         }
-        public Task<Auther> GetAutherByName(string name)
+        public async Task<Auther> GetAutherByName(string name)
         {
            
             try
             {
-                var getauther = _autherRepostory.GetAutherByName(name);
+                var getauther =await _autherRepostory.GetAutherByName(name);
                 if (getauther == null)
                 {
                     throw new ApplicationException($"Error: {"The Auther Not Found"}");
@@ -79,7 +79,7 @@ namespace Book_Store.Services
                 return getauther;
             }
             catch (Exception ex) {
-                throw new ApplicationException($"Error: {ex.Message}");
+                throw new ApplicationException($" {ex.Message}");
             }
 
         }
@@ -132,7 +132,7 @@ namespace Book_Store.Services
             }
             catch (Exception ex)
             {
-               throw new ApplicationException($"Error: {ex.Message}");
+               throw new ApplicationException($" {ex.Message}");
             }
         }
 
@@ -145,7 +145,7 @@ namespace Book_Store.Services
                 var update = await _autherRepostory.GetAutherByID(id);
                 if (update == null)
                 {
-                    throw new ApplicationException($"Error: {"The Auther Not Found"}");
+                    throw new ApplicationException($" {"The Auther Not Found"}");
                 }
 
                 update.FName = auther.FName;

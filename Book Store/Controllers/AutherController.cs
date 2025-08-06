@@ -45,9 +45,10 @@ namespace Book_Store.Controllers
                 return Ok(getAuther);
         }
         [HttpGet("numberbookfromauther")]
-        public object numberbookfromauther(int id)
+        public async Task<IActionResult> numberbookfromauther(int id)
         {
-            return _autherServices.numberbookfromauther(id);
+            var get=await _autherServices.numberbookfromauther(id);
+            return Ok(get);
         }
 
         [HttpPost("CreateAuther")]

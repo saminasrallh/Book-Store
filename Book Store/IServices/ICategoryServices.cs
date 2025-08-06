@@ -1,4 +1,5 @@
 ﻿using Book_Store.Entity;
+using Book_Store.Model;
 
 namespace Book_Store.IServices
 {
@@ -12,6 +13,6 @@ namespace Book_Store.IServices
         Task<Category> CreateCategory(string category);
         Task<Category> UpdateCategory(int id,string category);
         Task<Category> DeleteCategory(int id);
-        public object numberbookfromcategory(int id);
+       Task<NumberBook> numberbookfromcategory(int id);
     }
 }

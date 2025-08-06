@@ -48,9 +48,10 @@ namespace Book_Store.Controllers
             return Ok(getbook);
         }
         [HttpGet("numberbookfromcategory")]
-        public object numberbookfromcategory(int id)
+        public async Task<IActionResult> numberbookfromcategory(int id)
         {
-            return _services.numberbookfromcategory(id);
+            var get=await _services.numberbookfromcategory(id);
+            return Ok(get);
         }
 
         [HttpPost("CreateCategory")]

@@ -84,11 +84,17 @@ namespace Book_Store.Services
             }
 
         }
-        public object numberbookfromauther(int id)
+        public async Task<NumberBook> numberbookfromauther(int id)
         {
             try
             {
-                return _autherRepostory.numberbookfromauther(id);
+                
+                var get= await _autherRepostory.numberbookfromauther(id);
+                if (get == null)
+                {
+                    throw new ApplicationException($"Error: {"The Auther Not Found"}");
+                }
+                return get;
             }
             catch (Exception ex)
             {

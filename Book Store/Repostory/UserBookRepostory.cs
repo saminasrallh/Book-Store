@@ -54,7 +54,7 @@ namespace Book_Store.Repostory
 
 
 
-        public async Task<object> RetarnBook(UserBook userBook)
+        public async Task<UserBook> RetarnBook(UserBook userBook)
         {
             userBook.Book = null;
             _Context.UserBooks.Update(userBook);
@@ -62,7 +62,7 @@ namespace Book_Store.Repostory
 
             return userBook;
         }
-        public async Task<object>UpdaetQuantity(Book book)
+        public async Task<Book>UpdaetQuantity(Book book)
         {
             book.UserBook = null;
             _Context.Books.Update(book);

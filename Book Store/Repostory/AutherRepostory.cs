@@ -1,6 +1,7 @@
 ﻿using Book_Store.DBContext;
 using Book_Store.Entity;
 using Book_Store.IRepostry;
+using Book_Store.Model;
 using Microsoft.EntityFrameworkCore;
 
 namespace Book_Store.Repostory
@@ -63,14 +64,14 @@ namespace Book_Store.Repostory
             return auther;
         }
 
-        public object numberbookfromauther(int id)
+        public async Task<NumberBook> numberbookfromauther(int id)
         {
 
-            var number = _dbContext.Authers.Where(x=>x.Id==id).Select(a => new
+            var number = _dbContext.Authers.Where(x=>x.Id==id).Select(num => new NumberBook
             {
-                Fname = a.FName,
-                countBook = a.books.Count,
-            });
+                Name = num.FName,
+                Count = num.books.Count,
+            }).FirstOrDefault();
             
             return number;
         }

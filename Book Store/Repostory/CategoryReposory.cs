@@ -1,6 +1,7 @@
 ﻿using Book_Store.DBContext;
 using Book_Store.Entity;
 using Book_Store.IRepostry;
+using Book_Store.Model;
 using Microsoft.EntityFrameworkCore;
 
 namespace Book_Store.Repostory
@@ -54,17 +55,20 @@ namespace Book_Store.Repostory
         public async Task<Category> UpdateCategory(Category category)
         {
             _Context.Categories.Update(category);
-            _Context.SaveChanges();
+            await _Context.SaveChangesAsync();
             return category;
         }
-        public object numberbookfromcategory(int id)
+        public async Task<NumberBook?> Numberbookfromcategory(int id)
         {
-           var categoreycount= _Context.Categories.Include(x => x.Books).Where(x => x.Id == id).Select(x => new
-            {
-                categoryname = x.Name,
-                categoreycount = x.Books.Count(),
-            });
-            return categoreycount;
+            return await _Context.Categories.Include(x => x.Books).Where(x => x.Id == id)
+                .GroupBy(x=>x.Name)
+                .Select(x => new NumberBook
+                {
+                    Name =  x.Key,
+                    Count = x.Count()
+            }).FirstOrDefaultAsync();
+
+ 
         }
     }
 }

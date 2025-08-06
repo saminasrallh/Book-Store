@@ -14,7 +14,7 @@ namespace Book_Store.IServices
         Task<Auther> UpdateAuther(int id, AutherModel auther);
         Task<Auther> DeleteAuther(int id);
         Task<Auther> GetAutherByName(string name);
-        public object numberbookfromauther(int id);
+        Task<NumberBook> numberbookfromauther(int id);
        
     }
 }

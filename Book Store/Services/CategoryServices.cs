@@ -1,6 +1,7 @@
 ﻿using Book_Store.Entity;
 using Book_Store.IRepostry;
 using Book_Store.IServices;
+using Book_Store.Model;
 
 namespace Book_Store.Services
 {
@@ -80,11 +81,11 @@ namespace Book_Store.Services
             }
         }
 
-        public object numberbookfromcategory(int id)
+        public async Task<NumberBook> numberbookfromcategory(int id)
         {
             try
             {
-                var numbook = _categoryRepostory.numberbookfromcategory(id);
+                var numbook =await _categoryRepostory.Numberbookfromcategory(id);
                 return (numbook);
             }
             catch (Exception ex)

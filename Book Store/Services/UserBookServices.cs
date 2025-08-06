@@ -127,7 +127,7 @@ namespace Book_Store.Services
             }
         }
 
-        public async Task<object> RetarnBook(int id)
+        public async Task<UserBook> RetarnBook(int id)
         {
             try
             {

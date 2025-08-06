@@ -1,4 +1,5 @@
 ﻿using Book_Store.Entity;
+using Book_Store.Model;
 
 namespace Book_Store.IRepostry
 {
@@ -12,6 +13,6 @@ namespace Book_Store.IRepostry
         Task<Category> CreateCategory(Category category);
         Task<Category> UpdateCategory(Category category);
         Task<Category> DeleteCategory(Category category);
-        public object numberbookfromcategory(int id);
+        Task<NumberBook> Numberbookfromcategory(int id);
     }
 }

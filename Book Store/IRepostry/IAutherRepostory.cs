@@ -1,4 +1,5 @@
 ﻿using Book_Store.Entity;
+using Book_Store.Model;
 
 namespace Book_Store.IRepostry
 {
@@ -12,7 +13,7 @@ namespace Book_Store.IRepostry
         Task<Auther> UpdateAuther(Auther auther);
         Task<Auther> DeleteAuther(Auther auther);
         Task<Auther> GetAutherByName(string name);
-        public object numberbookfromauther(int id);
+        Task<NumberBook> numberbookfromauther(int id);
        
     }
 }

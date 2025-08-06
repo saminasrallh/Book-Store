@@ -18,7 +18,7 @@ namespace Book_Store.middleware
             var hour = DateTime.Now.Hour;
             if (hour >= 22 || hour < 6)
             {
-                httpContext.Response.StatusCode = 403;
+                //httpContext.Response.StatusCode = 403;
                 await httpContext.Response.WriteAsync("The site is closed");
 
             }

@@ -1,4 +1,5 @@
-﻿using Book_Store.Entity;
+﻿
+using Book_Store.Entity;
 using Book_Store.IRepostry;
 using Book_Store.IServices;
 using Book_Store.Model;
@@ -29,7 +30,7 @@ namespace Book_Store.Services
                 return  GetAuther.ToList(); 
             }
             catch(Exception ex) {
-                throw new ApplicationException($"Error: {ex.Message}");
+                throw new ApplicationException($" {ex.Message}");
             }
         }
         public async Task<Auther> GetAutherByID(int id)
@@ -41,8 +42,8 @@ namespace Book_Store.Services
                 {
                     throw new ApplicationException($"Error: {"The Auther Not Found"}");
                 }
-            
-                return getAuther ;
+           
+                return getAuther;
             }
             catch (Exception ex) {
                 throw new ApplicationException($" {ex.Message}");
@@ -126,7 +127,9 @@ namespace Book_Store.Services
                 {
                     throw new ApplicationException($"Error: {"The Auther Not Found"}");
                 }
-                _autherRepostory.DeleteAuther(delete);
+                delete.IsDeleted = true;
+                delete.DeletedTime = DateTime.Now;
+               await _autherRepostory.DeleteAuther(delete);
                 return (delete);
 
             }
@@ -155,7 +158,7 @@ namespace Book_Store.Services
 
 
 
-                _autherRepostory.UpdateAuther(update);
+                await _autherRepostory.UpdateAuther(update);
 
                 return (update);
             }

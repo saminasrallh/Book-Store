@@ -10,6 +10,8 @@ namespace Book_Store.Configuration
         {
             builder.ToTable("Authers");
             builder.HasKey(x => x.Id);
+            builder.Property(x=>x.IsDeleted).HasDefaultValue(false);
+
          
         }
     }

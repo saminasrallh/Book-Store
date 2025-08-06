@@ -2,7 +2,7 @@
 
 namespace Book_Store.Entity
 {
-    public class Book
+    public class Book:ISoftDelete
 
     {
         public int Id { get; set; }
@@ -26,7 +26,9 @@ namespace Book_Store.Entity
 
         public List<UserBook> UserBook { get; set; }
 
-        public long AvulebelQuantity {  get; set; } 
+        public long AvulebelQuantity {  get; set; }
+        public bool IsDeleted { get; set; }
+        public DateTime? DeletedTime { get; set; }
         // public List <Users> User { get; set; }
 
         //  [NotMapped]

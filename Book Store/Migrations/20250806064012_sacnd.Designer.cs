@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Book_Store.Migrations
 {
     [DbContext(typeof(AppDBContext))]
-    [Migration("20250729131940_UserBook")]
-    partial class UserBook
+    [Migration("20250806064012_sacnd")]
+    partial class sacnd
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,21 +24,6 @@ namespace Book_Store.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("BookUsers", b =>
-                {
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("booksId")
-                        .HasColumnType("int");
-
-                    b.HasKey("UserId", "booksId");
-
-                    b.HasIndex("booksId");
-
-                    b.ToTable("BookUsers");
-                });
 
             modelBuilder.Entity("Book_Store.Entity.Auther", b =>
                 {
@@ -79,19 +64,30 @@ namespace Book_Store.Migrations
                     b.Property<int?>("AutherId")
                         .HasColumnType("int");
 
+                    b.Property<long>("AvulebelQuantity")
+                        .HasColumnType("bigint");
+
                     b.Property<DateTime>("Created")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 7, 29, 16, 19, 40, 721, DateTimeKind.Local).AddTicks(943));
+                        .HasDefaultValue(new DateTime(2025, 8, 6, 9, 40, 12, 112, DateTimeKind.Local).AddTicks(1466));
 
                     b.Property<string>("CreatedBy")
                         .IsRequired()
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
+                    b.Property<DateTime?>("DeletedTime")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
 
                     b.Property<DateTime?>("LastUpdated")
                         .HasColumnType("datetime2");
@@ -165,7 +161,7 @@ namespace Book_Store.Migrations
                     b.Property<DateTime>("RentalTime")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 7, 29, 16, 19, 40, 722, DateTimeKind.Local).AddTicks(449));
+                        .HasDefaultValue(new DateTime(2025, 8, 6, 9, 40, 12, 113, DateTimeKind.Local).AddTicks(1856));
 
                     b.Property<DateTime?>("ReturnTime")
                         .HasColumnType("datetime2");
@@ -176,7 +172,7 @@ namespace Book_Store.Migrations
                     b.Property<DateTime>("deadline")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 8, 29, 16, 19, 40, 722, DateTimeKind.Local).AddTicks(712));
+                        .HasDefaultValue(new DateTime(2025, 9, 6, 9, 40, 12, 113, DateTimeKind.Local).AddTicks(2191));
 
                     b.HasKey("Id");
 
@@ -198,7 +194,7 @@ namespace Book_Store.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 7, 29, 16, 19, 40, 722, DateTimeKind.Local).AddTicks(1935));
+                        .HasDefaultValue(new DateTime(2025, 8, 6, 9, 40, 12, 113, DateTimeKind.Local).AddTicks(3614));
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -261,27 +257,12 @@ namespace Book_Store.Migrations
                     b.ToTable("UserRoles");
                 });
 
-            modelBuilder.Entity("BookUsers", b =>
-                {
-                    b.HasOne("Book_Store.Entity.Users", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Book_Store.Entity.Book", null)
-                        .WithMany()
-                        .HasForeignKey("booksId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Book_Store.Entity.Book", b =>
                 {
                     b.HasOne("Book_Store.Entity.Auther", "Auther")
                         .WithMany("books")
                         .HasForeignKey("AutherId")
-                        .OnDelete(DeleteBehavior.SetNull);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("Auther");
                 });
@@ -291,13 +272,13 @@ namespace Book_Store.Migrations
                     b.HasOne("Book_Store.Entity.Book", "Book")
                         .WithMany("UserBook")
                         .HasForeignKey("BookId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("Book_Store.Entity.Users", "User")
                         .WithMany("UserBooks")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Book");

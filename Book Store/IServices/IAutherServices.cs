@@ -1,4 +1,5 @@
-﻿using Book_Store.Entity;
+﻿
+using Book_Store.Entity;
 using Book_Store.Model;
 
 namespace Book_Store.IServices

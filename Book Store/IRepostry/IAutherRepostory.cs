@@ -13,5 +13,6 @@ namespace Book_Store.IRepostry
         Task<Auther> DeleteAuther(Auther auther);
         Task<Auther> GetAutherByName(string name);
         public object numberbookfromauther(int id);
+       
     }
 }

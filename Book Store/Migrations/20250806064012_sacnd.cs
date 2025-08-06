@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Book_Store.Migrations
 {
     /// <inheritdoc />
-    public partial class threp : Migration
+    public partial class sacnd : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -16,84 +16,105 @@ namespace Book_Store.Migrations
                 table: "Users",
                 type: "datetime2",
                 nullable: false,
-                defaultValue: new DateTime(2025, 7, 31, 14, 27, 56, 197, DateTimeKind.Local).AddTicks(4432),
+                defaultValue: new DateTime(2025, 8, 6, 9, 40, 12, 113, DateTimeKind.Local).AddTicks(3614),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime2",
-                oldDefaultValue: new DateTime(2025, 7, 31, 14, 25, 15, 47, DateTimeKind.Local).AddTicks(3649));
+                oldDefaultValue: new DateTime(2025, 8, 6, 9, 31, 48, 661, DateTimeKind.Local).AddTicks(5836));
 
             migrationBuilder.AlterColumn<DateTime>(
                 name: "deadline",
                 table: "UserBook",
                 type: "datetime2",
                 nullable: false,
-                defaultValue: new DateTime(2025, 8, 31, 14, 27, 56, 197, DateTimeKind.Local).AddTicks(3039),
+                defaultValue: new DateTime(2025, 9, 6, 9, 40, 12, 113, DateTimeKind.Local).AddTicks(2191),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime2",
-                oldDefaultValue: new DateTime(2025, 8, 31, 14, 25, 15, 47, DateTimeKind.Local).AddTicks(2277));
+                oldDefaultValue: new DateTime(2025, 9, 6, 9, 31, 48, 661, DateTimeKind.Local).AddTicks(4439));
 
             migrationBuilder.AlterColumn<DateTime>(
                 name: "RentalTime",
                 table: "UserBook",
                 type: "datetime2",
                 nullable: false,
-                defaultValue: new DateTime(2025, 7, 31, 14, 27, 56, 197, DateTimeKind.Local).AddTicks(2689),
+                defaultValue: new DateTime(2025, 8, 6, 9, 40, 12, 113, DateTimeKind.Local).AddTicks(1856),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime2",
-                oldDefaultValue: new DateTime(2025, 7, 31, 14, 25, 15, 47, DateTimeKind.Local).AddTicks(1973));
+                oldDefaultValue: new DateTime(2025, 8, 6, 9, 31, 48, 661, DateTimeKind.Local).AddTicks(4131));
 
             migrationBuilder.AlterColumn<DateTime>(
                 name: "Created",
                 table: "Books",
                 type: "datetime2",
                 nullable: false,
-                defaultValue: new DateTime(2025, 7, 31, 14, 27, 56, 196, DateTimeKind.Local).AddTicks(1996),
+                defaultValue: new DateTime(2025, 8, 6, 9, 40, 12, 112, DateTimeKind.Local).AddTicks(1466),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime2",
-                oldDefaultValue: new DateTime(2025, 7, 31, 14, 25, 15, 46, DateTimeKind.Local).AddTicks(1138));
+                oldDefaultValue: new DateTime(2025, 8, 6, 9, 31, 48, 660, DateTimeKind.Local).AddTicks(3279));
+
+            migrationBuilder.AddColumn<DateTime>(
+                name: "DeletedTime",
+                table: "Books",
+                type: "datetime2",
+                nullable: true);
+
+            migrationBuilder.AddColumn<bool>(
+                name: "IsDeleted",
+                table: "Books",
+                type: "bit",
+                nullable: false,
+                defaultValue: false);
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropColumn(
+                name: "DeletedTime",
+                table: "Books");
+
+            migrationBuilder.DropColumn(
+                name: "IsDeleted",
+                table: "Books");
+
             migrationBuilder.AlterColumn<DateTime>(
                 name: "CreatedDate",
                 table: "Users",
                 type: "datetime2",
                 nullable: false,
-                defaultValue: new DateTime(2025, 7, 31, 14, 25, 15, 47, DateTimeKind.Local).AddTicks(3649),
+                defaultValue: new DateTime(2025, 8, 6, 9, 31, 48, 661, DateTimeKind.Local).AddTicks(5836),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime2",
-                oldDefaultValue: new DateTime(2025, 7, 31, 14, 27, 56, 197, DateTimeKind.Local).AddTicks(4432));
+                oldDefaultValue: new DateTime(2025, 8, 6, 9, 40, 12, 113, DateTimeKind.Local).AddTicks(3614));
 
             migrationBuilder.AlterColumn<DateTime>(
                 name: "deadline",
                 table: "UserBook",
                 type: "datetime2",
                 nullable: false,
-                defaultValue: new DateTime(2025, 8, 31, 14, 25, 15, 47, DateTimeKind.Local).AddTicks(2277),
+                defaultValue: new DateTime(2025, 9, 6, 9, 31, 48, 661, DateTimeKind.Local).AddTicks(4439),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime2",
-                oldDefaultValue: new DateTime(2025, 8, 31, 14, 27, 56, 197, DateTimeKind.Local).AddTicks(3039));
+                oldDefaultValue: new DateTime(2025, 9, 6, 9, 40, 12, 113, DateTimeKind.Local).AddTicks(2191));
 
             migrationBuilder.AlterColumn<DateTime>(
                 name: "RentalTime",
                 table: "UserBook",
                 type: "datetime2",
                 nullable: false,
-                defaultValue: new DateTime(2025, 7, 31, 14, 25, 15, 47, DateTimeKind.Local).AddTicks(1973),
+                defaultValue: new DateTime(2025, 8, 6, 9, 31, 48, 661, DateTimeKind.Local).AddTicks(4131),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime2",
-                oldDefaultValue: new DateTime(2025, 7, 31, 14, 27, 56, 197, DateTimeKind.Local).AddTicks(2689));
+                oldDefaultValue: new DateTime(2025, 8, 6, 9, 40, 12, 113, DateTimeKind.Local).AddTicks(1856));
 
             migrationBuilder.AlterColumn<DateTime>(
                 name: "Created",
                 table: "Books",
                 type: "datetime2",
                 nullable: false,
-                defaultValue: new DateTime(2025, 7, 31, 14, 25, 15, 46, DateTimeKind.Local).AddTicks(1138),
+                defaultValue: new DateTime(2025, 8, 6, 9, 31, 48, 660, DateTimeKind.Local).AddTicks(3279),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime2",
-                oldDefaultValue: new DateTime(2025, 7, 31, 14, 27, 56, 196, DateTimeKind.Local).AddTicks(1996));
+                oldDefaultValue: new DateTime(2025, 8, 6, 9, 40, 12, 112, DateTimeKind.Local).AddTicks(1466));
         }
     }
 }

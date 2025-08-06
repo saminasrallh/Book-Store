@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Book_Store.Migrations
 {
     [DbContext(typeof(AppDBContext))]
-    [Migration("20250730074032_one")]
-    partial class one
+    [Migration("20250806071418_softdelete1")]
+    partial class softdelete1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -40,9 +40,17 @@ namespace Book_Store.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime?>("DeletedTime")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("FName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
 
                     b.Property<string>("LName")
                         .IsRequired()
@@ -64,19 +72,30 @@ namespace Book_Store.Migrations
                     b.Property<int?>("AutherId")
                         .HasColumnType("int");
 
+                    b.Property<long>("AvulebelQuantity")
+                        .HasColumnType("bigint");
+
                     b.Property<DateTime>("Created")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 7, 30, 10, 40, 32, 392, DateTimeKind.Local).AddTicks(9733));
+                        .HasDefaultValue(new DateTime(2025, 8, 6, 10, 14, 17, 945, DateTimeKind.Local).AddTicks(1232));
 
                     b.Property<string>("CreatedBy")
                         .IsRequired()
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
+                    b.Property<DateTime?>("DeletedTime")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
 
                     b.Property<DateTime?>("LastUpdated")
                         .HasColumnType("datetime2");
@@ -109,6 +128,12 @@ namespace Book_Store.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime?>("DeletedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -150,7 +175,7 @@ namespace Book_Store.Migrations
                     b.Property<DateTime>("RentalTime")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 7, 30, 10, 40, 32, 393, DateTimeKind.Local).AddTicks(9496));
+                        .HasDefaultValue(new DateTime(2025, 8, 6, 10, 14, 17, 946, DateTimeKind.Local).AddTicks(2747));
 
                     b.Property<DateTime?>("ReturnTime")
                         .HasColumnType("datetime2");
@@ -161,7 +186,7 @@ namespace Book_Store.Migrations
                     b.Property<DateTime>("deadline")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 8, 30, 10, 40, 32, 393, DateTimeKind.Local).AddTicks(9748));
+                        .HasDefaultValue(new DateTime(2025, 9, 6, 10, 14, 17, 946, DateTimeKind.Local).AddTicks(3055));
 
                     b.HasKey("Id");
 
@@ -183,7 +208,10 @@ namespace Book_Store.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 7, 30, 10, 40, 32, 394, DateTimeKind.Local).AddTicks(973));
+                        .HasDefaultValue(new DateTime(2025, 8, 6, 10, 14, 17, 946, DateTimeKind.Local).AddTicks(4571));
+
+                    b.Property<DateTime?>("DeletedTime")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -193,6 +221,11 @@ namespace Book_Store.Migrations
                         .IsRequired()
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
 
                     b.Property<string>("LName")
                         .IsRequired()
@@ -251,7 +284,7 @@ namespace Book_Store.Migrations
                     b.HasOne("Book_Store.Entity.Auther", "Auther")
                         .WithMany("books")
                         .HasForeignKey("AutherId")
-                        .OnDelete(DeleteBehavior.SetNull);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("Auther");
                 });
@@ -261,13 +294,13 @@ namespace Book_Store.Migrations
                     b.HasOne("Book_Store.Entity.Book", "Book")
                         .WithMany("UserBook")
                         .HasForeignKey("BookId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("Book_Store.Entity.Users", "User")
                         .WithMany("UserBooks")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Book");

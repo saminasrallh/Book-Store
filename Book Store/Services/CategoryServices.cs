@@ -120,7 +120,9 @@ namespace Book_Store.Services
                 {
                     throw new ApplicationException($"Error: {"The Categore Not Found"}");
                 }
-                _categoryRepostory.DeleteCategory(delete);
+                delete.IsDeleted=true;
+                delete.DeletedTime = DateTime.Now;
+                await _categoryRepostory.DeleteCategory(delete);
                 return (delete);
             }
             catch (Exception ex)
@@ -138,7 +140,7 @@ namespace Book_Store.Services
                 var updatecatigory = await _categoryRepostory.GetCategoryById(id);
 
                 updatecatigory.Name = category;
-                _categoryRepostory.UpdateCategory(updatecatigory);
+               await _categoryRepostory.UpdateCategory(updatecatigory);
 
                 return (updatecatigory);
             }

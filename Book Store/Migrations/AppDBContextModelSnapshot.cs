@@ -37,9 +37,17 @@ namespace Book_Store.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime?>("DeletedTime")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("FName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
 
                     b.Property<string>("LName")
                         .IsRequired()
@@ -67,16 +75,24 @@ namespace Book_Store.Migrations
                     b.Property<DateTime>("Created")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 7, 31, 16, 49, 13, 423, DateTimeKind.Local).AddTicks(3927));
+                        .HasDefaultValue(new DateTime(2025, 8, 6, 10, 14, 17, 945, DateTimeKind.Local).AddTicks(1232));
 
                     b.Property<string>("CreatedBy")
                         .IsRequired()
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
+                    b.Property<DateTime?>("DeletedTime")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
 
                     b.Property<DateTime?>("LastUpdated")
                         .HasColumnType("datetime2");
@@ -109,6 +125,12 @@ namespace Book_Store.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime?>("DeletedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -150,7 +172,7 @@ namespace Book_Store.Migrations
                     b.Property<DateTime>("RentalTime")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 7, 31, 16, 49, 13, 424, DateTimeKind.Local).AddTicks(3437));
+                        .HasDefaultValue(new DateTime(2025, 8, 6, 10, 14, 17, 946, DateTimeKind.Local).AddTicks(2747));
 
                     b.Property<DateTime?>("ReturnTime")
                         .HasColumnType("datetime2");
@@ -161,7 +183,7 @@ namespace Book_Store.Migrations
                     b.Property<DateTime>("deadline")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 8, 31, 16, 49, 13, 424, DateTimeKind.Local).AddTicks(3704));
+                        .HasDefaultValue(new DateTime(2025, 9, 6, 10, 14, 17, 946, DateTimeKind.Local).AddTicks(3055));
 
                     b.HasKey("Id");
 
@@ -183,7 +205,10 @@ namespace Book_Store.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 7, 31, 16, 49, 13, 424, DateTimeKind.Local).AddTicks(4919));
+                        .HasDefaultValue(new DateTime(2025, 8, 6, 10, 14, 17, 946, DateTimeKind.Local).AddTicks(4571));
+
+                    b.Property<DateTime?>("DeletedTime")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -193,6 +218,11 @@ namespace Book_Store.Migrations
                         .IsRequired()
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
 
                     b.Property<string>("LName")
                         .IsRequired()
@@ -251,7 +281,7 @@ namespace Book_Store.Migrations
                     b.HasOne("Book_Store.Entity.Auther", "Auther")
                         .WithMany("books")
                         .HasForeignKey("AutherId")
-                        .OnDelete(DeleteBehavior.SetNull);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("Auther");
                 });
@@ -261,13 +291,13 @@ namespace Book_Store.Migrations
                     b.HasOne("Book_Store.Entity.Book", "Book")
                         .WithMany("UserBook")
                         .HasForeignKey("BookId")
-                        .OnDelete(DeleteBehavior.SetNull)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("Book_Store.Entity.Users", "User")
                         .WithMany("UserBooks")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.SetNull)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Book");

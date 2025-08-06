@@ -79,7 +79,7 @@ namespace Book_Store.Services
                     throw new ApplicationException($"Error: {"The Book Or User Not Found"}");
                 }
                
-                if (getuser.CountUuser > 3 ) {
+                if (getuser.CountUuser >= 3 ) {
                   throw  new ApplicationException($"Error: {"The Book Not Avelabel"}"); 
                    
                 }

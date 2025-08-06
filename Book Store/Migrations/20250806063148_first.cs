@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Book_Store.Migrations
 {
     /// <inheritdoc />
-    public partial class UserBook : Migration
+    public partial class first : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -61,7 +61,7 @@ namespace Book_Store.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     FName = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
                     LName = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 7, 29, 16, 19, 40, 722, DateTimeKind.Local).AddTicks(1935)),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 8, 6, 9, 31, 48, 661, DateTimeKind.Local).AddTicks(5836)),
                     phoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -82,11 +82,12 @@ namespace Book_Store.Migrations
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Quantity = table.Column<long>(type: "bigint", nullable: false),
                     Price = table.Column<double>(type: "float", nullable: false),
-                    Created = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 7, 29, 16, 19, 40, 721, DateTimeKind.Local).AddTicks(943)),
+                    Created = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 8, 6, 9, 31, 48, 660, DateTimeKind.Local).AddTicks(3279)),
                     CreatedBy = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
                     UpdateBy = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
                     LastUpdated = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    AutherId = table.Column<int>(type: "int", nullable: true)
+                    AutherId = table.Column<int>(type: "int", nullable: true),
+                    AvulebelQuantity = table.Column<long>(type: "bigint", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -96,7 +97,7 @@ namespace Book_Store.Migrations
                         column: x => x.AutherId,
                         principalTable: "Authers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.SetNull);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -118,30 +119,6 @@ namespace Book_Store.Migrations
                     table.ForeignKey(
                         name: "FK_UserRoles_Users_UsersId",
                         column: x => x.UsersId,
-                        principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "BookUsers",
-                columns: table => new
-                {
-                    UserId = table.Column<int>(type: "int", nullable: false),
-                    booksId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_BookUsers", x => new { x.UserId, x.booksId });
-                    table.ForeignKey(
-                        name: "FK_BookUsers_Books_booksId",
-                        column: x => x.booksId,
-                        principalTable: "Books",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_BookUsers_Users_UserId",
-                        column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -177,8 +154,8 @@ namespace Book_Store.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    RentalTime = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 7, 29, 16, 19, 40, 722, DateTimeKind.Local).AddTicks(449)),
-                    deadline = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 8, 29, 16, 19, 40, 722, DateTimeKind.Local).AddTicks(712)),
+                    RentalTime = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 8, 6, 9, 31, 48, 661, DateTimeKind.Local).AddTicks(4131)),
+                    deadline = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 9, 6, 9, 31, 48, 661, DateTimeKind.Local).AddTicks(4439)),
                     ReturnTime = table.Column<DateTime>(type: "datetime2", nullable: true),
                     UserId = table.Column<int>(type: "int", nullable: false),
                     BookId = table.Column<int>(type: "int", nullable: false)
@@ -191,24 +168,19 @@ namespace Book_Store.Migrations
                         column: x => x.BookId,
                         principalTable: "Books",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_UserBook_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Books_AutherId",
                 table: "Books",
                 column: "AutherId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_BookUsers_booksId",
-                table: "BookUsers",
-                column: "booksId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Categores_Book_BooksId",
@@ -234,9 +206,6 @@ namespace Book_Store.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "BookUsers");
-
             migrationBuilder.DropTable(
                 name: "Categores_Book");
 

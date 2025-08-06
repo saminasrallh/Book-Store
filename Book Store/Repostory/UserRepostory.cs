@@ -43,7 +43,7 @@ namespace Book_Store.Repostory
         {
 
 
-                  _Context.Users.Remove(user);
+                  _Context.Users.Update(user);
             await _Context.SaveChangesAsync();
             
             return (user);

@@ -20,6 +20,11 @@ namespace Book_Store.DBContext
         {
 
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(Users).Assembly);
+            modelBuilder.Entity<Book>().HasQueryFilter(b => !b.IsDeleted);
+            modelBuilder.Entity<Auther>().HasQueryFilter(b => !b.IsDeleted);
+            modelBuilder.Entity<Users>().HasQueryFilter(b => !b.IsDeleted);
+            modelBuilder.Entity<Category>().HasQueryFilter(b => !b.IsDeleted);
+
 
         }
 

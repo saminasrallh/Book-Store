@@ -11,10 +11,12 @@ namespace Book_Store.Services
     public class BookServices : IBookServices
     {
         private readonly IBookRepostory _bookRepostory;
+        private readonly IAutherRepostory _autherRepostory;
 
-        public BookServices(IBookRepostory bookRepostory)
+        public BookServices(IBookRepostory bookRepostory, IAutherRepostory autherRepostory)
         {
             _bookRepostory = bookRepostory;
+            _autherRepostory = autherRepostory;
         }
         public async Task<IEnumerable<Book>> GetallBook()
         {
@@ -69,7 +71,7 @@ namespace Book_Store.Services
         {
             try
             {
-
+                
                 var create = new Book
                 {
                     Title = book.Title,
@@ -79,10 +81,13 @@ namespace Book_Store.Services
                     CreatedBy = book.CreatedBy,
                     AutherId = book.AutherId,
                     AvulebelQuantity = book.Quantity,
+                    Created=DateTime.Now,
 
 
                 };
-                if (create.AutherId == null||create.AutherId==0)
+               var Auther=await _autherRepostory.GetAutherByID((int)create.AutherId);
+                
+                if (create.AutherId==0||Auther==null)
                 {
                     throw new ApplicationException($"Error: {"The Auther Not Found"}");
                 }
@@ -104,7 +109,9 @@ namespace Book_Store.Services
                 {
                     throw new ApplicationException($"Error: {"The Book Not Found"}");
                 }
-                _bookRepostory.DeleteBook(delete);
+                delete.IsDeleted = true;
+                delete.DeletedTime = DateTime.Now;
+                await _bookRepostory.DeleteBook(delete);
                 return (delete);
             }
             catch (Exception ex)
@@ -132,7 +139,7 @@ namespace Book_Store.Services
                 updatebook.UpdateBy = book.UpdateBy;
                 updatebook.LastUpdated = DateTime.Now;
                 updatebook.AvulebelQuantity = book.Quantity;
-                _bookRepostory.UpdateBook(updatebook);
+                await _bookRepostory.UpdateBook(updatebook);
 
                 return (updatebook);
             }

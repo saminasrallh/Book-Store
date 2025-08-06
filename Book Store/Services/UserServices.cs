@@ -75,6 +75,7 @@ namespace Book_Store.Services
                     Password = user.Password,
                     phoneNumber = user.phoneNumber,
                     UserName = user.UserName,
+                    CreatedDate= DateTime.Now,
 
                 };
                 await _UserRepostry.CreateUser(create);
@@ -95,7 +96,9 @@ namespace Book_Store.Services
                 {
                     throw new ApplicationException($"Error: {"The User Not Found"}");
                 }
-                _UserRepostry.DeleteUser(userdelete);
+                userdelete.IsDeleted = true;
+                userdelete.DeletedTime= DateTime.Now;
+               await _UserRepostry.DeleteUser(userdelete);
 
                 return (userdelete);
             }
@@ -149,7 +152,7 @@ namespace Book_Store.Services
                 updateuser.FName = users.FName;
                 updateuser.LName = users.LName;
 
-                _UserRepostry.UpdateUser(updateuser);
+               await _UserRepostry.UpdateUser(updateuser);
                 return (updateuser);
             }
             catch (Exception ex)

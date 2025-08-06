@@ -46,8 +46,8 @@ namespace Book_Store.Repostory
 
         public async Task<Book> DeleteBook(Book book)
         {
-            _Context.Books.Remove(book);
-            _Context.SaveChanges();
+            _Context.Books.Update(book);
+           await _Context.SaveChangesAsync();
             return book;
         }
 

@@ -16,6 +16,7 @@ namespace Book_Store.Configuration
             builder.Property(x => x.Created).HasDefaultValue(DateTime.Now);
             builder.Property(x=>x.CreatedBy).HasMaxLength(10);
             builder.Property(x=>x.UpdateBy).HasMaxLength(10);
+            builder.Property(x=>x.IsDeleted).HasDefaultValue(false);
 
 
             builder.HasMany(x => x.BookCategory).WithMany(x => x.Books).UsingEntity("Categores_Book");

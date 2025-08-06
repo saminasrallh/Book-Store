@@ -39,14 +39,14 @@ namespace Book_Store.Repostory
         public async Task<Category> CreateCategory(Category category)
         {
             await _Context.Categories.AddAsync(category);
-            _Context.SaveChanges();
+            await _Context.SaveChangesAsync();
             return category;
         }
 
         public async Task<Category> DeleteCategory(Category category)
         {
-            _Context.Categories.Remove(category);
-            _Context.SaveChanges();
+            _Context.Categories.Update(category);
+            await _Context.SaveChangesAsync();
             return category;
         }
 

@@ -13,6 +13,7 @@ namespace Book_Store.Configuration
             builder.Property(x=>x.CreatedDate).HasDefaultValue(DateTime.Now);
             builder.Property(x => x.FName).HasMaxLength(10);
             builder.Property(x => x.LName).HasMaxLength(10);
+            builder.Property(x => x.IsDeleted).HasDefaultValue(false);
 
             builder.HasMany(x => x.Roles).WithMany(x => x.Users).UsingEntity("UserRoles");
             builder.HasMany(x=>x.UserBooks).WithOne(x=>x.User).HasForeignKey(x=>x.UserId).OnDelete(DeleteBehavior.Restrict);

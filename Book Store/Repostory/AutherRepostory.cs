@@ -50,8 +50,8 @@ namespace Book_Store.Repostory
 
         public async Task<Auther> DeleteAuther(Auther auther)
         {
-           _dbContext.Authers.Remove(auther);
-            _dbContext.SaveChangesAsync() ;
+           _dbContext.Authers.Update(auther);
+           await _dbContext.SaveChangesAsync() ;
             return auther;
         }
 
@@ -59,7 +59,7 @@ namespace Book_Store.Repostory
         public async Task<Auther> UpdateAuther(Auther auther)
         {
             _dbContext.Authers.Update(auther);
-            _dbContext.SaveChanges();
+           await _dbContext.SaveChangesAsync();
             return auther;
         }
 
@@ -74,5 +74,7 @@ namespace Book_Store.Repostory
             
             return number;
         }
+
+       
     }
 }

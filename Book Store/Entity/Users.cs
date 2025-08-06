@@ -1,6 +1,6 @@
 ﻿namespace Book_Store.Entity
 {
-    public class Users
+    public class Users:ISoftDelete
     {
         public int Id { get; set; }
         public string FName { get; set; }
@@ -14,7 +14,7 @@
 
       //  public List <Book>books { get; set; }
         public List <UserBook> UserBooks { get; set; }
-
-     
+        public bool IsDeleted { get ; set; }
+        public DateTime? DeletedTime { get ; set; }
     }
 }

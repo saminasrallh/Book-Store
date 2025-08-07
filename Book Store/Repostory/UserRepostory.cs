@@ -26,7 +26,7 @@ namespace Book_Store.Repostory
             _config = config;
             _Context = appDBContext;
         }
-        public async Task<IEnumerable<Users>> GetUsers()
+        public async Task<List<Users>> GetUsers()
         {
             var user = await _Context.Users.AsNoTracking().OrderBy(x => x.FName ).ToListAsync();
 
@@ -59,7 +59,7 @@ namespace Book_Store.Repostory
             return user;
         }
 
-        public async Task<IEnumerable<Users>> GetUsersByName(string name)
+        public async Task<List<Users>> GetUsersByName(string name)
         {
             var user = await _Context.Users.AsNoTracking().Where(x=>x.FName==name ||x.LName==name).ToListAsync();
 

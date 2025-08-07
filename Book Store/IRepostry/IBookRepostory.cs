@@ -4,7 +4,7 @@ namespace Book_Store.IRepostry
 {
     public interface IBookRepostory
     {
-        Task<IEnumerable<Book>> GetallBook();
+        Task<List<Book>> GetallBook();
         Task<Book> GetBookByID(int id);
 
         Task<Book> CreateBook(Book book);

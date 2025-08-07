@@ -18,7 +18,7 @@ namespace Book_Store.Services
             _bookRepostory = bookRepostory;
             _autherRepostory = autherRepostory;
         }
-        public async Task<IEnumerable<Book>> GetallBook()
+        public async Task<List<Book>> GetallBook()
         {
             try
             {

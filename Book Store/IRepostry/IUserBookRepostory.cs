@@ -6,9 +6,9 @@ namespace Book_Store.IRepostry
     {
         Task<UserBook>GetById(int id);
     
-        Task<IEnumerable<UserBook>> getallRenter();
-        Task<IEnumerable< UserBook>> getRenyedBooksbyUserId (int id);
-       Task<IEnumerable<UserBook>> getRenyedBooksbybookId (int id);
+        Task<List<UserBook>> getallRenter();
+        Task<List< UserBook>> getRenyedBooksbyUserId (int id);
+       Task<List<UserBook>> getRenyedBooksbybookId (int id);
        Task <UserBook> create (UserBook userBook,Book book);
        Task<UserBook> RetarnBook(UserBook userBook);
         Task<Book> UpdaetQuantity(Book book);

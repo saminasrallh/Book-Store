@@ -6,9 +6,9 @@ namespace Book_Store.IServices
     {
         Task<UserBook> GetById(int id);
 
-        Task<IEnumerable<UserBook>> getallRenter();
-        Task<IEnumerable<UserBook>> getRenyedBooksbyUserId(int id);
-        Task<IEnumerable<UserBook>> getRenyedBooksbybookId(int id);
+        Task<List<UserBook>> getallRenter();
+        Task<List<UserBook>> getRenyedBooksbyUserId(int id);
+        Task<List<UserBook>> getRenyedBooksbybookId(int id);
         Task<UserBook> create(int userid,int bookid);
         Task<UserBook> RetarnBook(int id);
       

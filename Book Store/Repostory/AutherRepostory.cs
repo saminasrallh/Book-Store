@@ -15,13 +15,13 @@ namespace Book_Store.Repostory
             _dbContext = dbContext;
         }
 
-        public async Task<IEnumerable<Auther>> GetAutherِAndBook()
+        public async Task<List<Auther>> GetAutherِAndBook()
         {
-            var get=await _dbContext.Authers.Include(x=>x.books).AsNoTracking().ToListAsync();
+            List<Auther> get=await _dbContext.Authers.Include(x=>x.books).AsNoTracking().ToListAsync();
             return get;
         }
 
-        public async Task<IEnumerable<Auther>> GetAuther()
+        public async Task<List<Auther>> GetAuther()
         {
             var get = await _dbContext.Authers.AsNoTracking().ToListAsync();
             return get;

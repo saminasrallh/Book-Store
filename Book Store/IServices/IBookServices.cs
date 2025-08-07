@@ -5,7 +5,7 @@ namespace Book_Store.IServices
 {
     public interface IBookServices
     {
-        Task<IEnumerable<Book>> GetallBook();
+        Task<List<Book>> GetallBook();
         Task<Book> GetBookByID(int id);
 
         Task<Book> CreateBook(BookModelCreate book);

@@ -5,8 +5,8 @@ namespace Book_Store.IRepostry
 {
     public interface IAutherRepostory
     {
-        Task<IEnumerable<Auther>> GetAuther();
-        Task<IEnumerable<Auther>> GetAutherِAndBook();
+        Task<List<Auther>> GetAuther();
+        Task<List<Auther>> GetAutherِAndBook();
         Task<Auther> GetAutherByID(int id);
 
         Task<Auther> CreateAuther(Auther auther);

@@ -14,12 +14,12 @@ namespace Book_Store.Repostory
         {
             _Context = context;
         }
-        public async Task<IEnumerable<Category>> GetAllCategory()
+        public async Task<List<Category>> GetAllCategory()
         {
             var get=await  _Context.Categories.AsNoTracking().ToListAsync();
             return get;
         }
-        public async Task<IEnumerable<Category>> GetAllCategoryAndBook()
+        public async Task<List<Category>> GetAllCategoryAndBook()
         {
             var get = await _Context.Categories.Include(x=>x.Books).AsNoTracking().ToListAsync();
             return get;

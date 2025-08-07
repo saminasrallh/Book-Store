@@ -16,7 +16,7 @@ namespace Book_Store.Services
         {
             _UserRepostry = userRepostry;
         }
-        public async Task<IEnumerable<Users>> GetUsers()
+        public async Task<List<Users>> GetUsers()
         {
             try
             {
@@ -46,7 +46,7 @@ namespace Book_Store.Services
                 throw new ApplicationException($" {ex.Message}");
             }
         }
-        public async Task<IEnumerable<Users>> GetUsersByName(string name)
+        public async Task<List<Users>> GetUsersByName(string name)
         {
             try
             {

@@ -19,7 +19,7 @@ namespace Book_Store.Services
             _userRepostry = userRepostry;
         }
 
-        public async Task<IEnumerable<UserBook>> getallRenter()
+        public async Task<List<UserBook>> getallRenter()
         {
             try
             {
@@ -35,7 +35,7 @@ namespace Book_Store.Services
                 throw new ApplicationException($" {ex.Message}");
             }
         }
-        public async Task<IEnumerable<UserBook>> getRenyedBooksbyUserId(int id)
+        public async Task<List<UserBook>> getRenyedBooksbyUserId(int id)
         {
             try
             {
@@ -52,7 +52,7 @@ namespace Book_Store.Services
             }
 
         }
-        public async Task<IEnumerable<UserBook>> getRenyedBooksbybookId(int id)
+        public async Task<List<UserBook>> getRenyedBooksbybookId(int id)
         {
             try
             {

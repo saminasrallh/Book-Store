@@ -5,8 +5,8 @@ namespace Book_Store.IRepostry
 {
     public interface ICategoryRepostory
     {
-         Task<IEnumerable<Category>> GetAllCategory();
-        Task<IEnumerable<Category>> GetAllCategoryAndBook();
+         Task<List<Category>> GetAllCategory();
+        Task<List<Category>> GetAllCategoryAndBook();
 
         Task<Category> GetCategoryById(int id);
         Task<Category> GetCategoryByName(string name);

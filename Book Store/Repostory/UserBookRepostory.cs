@@ -21,21 +21,21 @@ namespace Book_Store.Repostory
                 .AsNoTracking().FirstOrDefaultAsync(x=>x.Id==id);
             return get;
         }
-        public async Task<IEnumerable<UserBook>> getallRenter()
+        public async Task<List<UserBook>> getallRenter()
         {
         var get=await _Context.UserBooks.Include(x=>x.Book).Include(x=>x.User)
                 .AsNoTracking().Where(x=>x.ReturnTime==null).ToListAsync();
             return get;
         }
 
-        public async Task<IEnumerable<UserBook>> getRenyedBooksbybookId(int id)
+        public async Task<List<UserBook>> getRenyedBooksbybookId(int id)
         {
            var getbook=await _Context.UserBooks.Include(x => x.Book).Include(x => x.User).AsNoTracking()
                .Where(x=>x.BookId==id && x.ReturnTime==null).ToListAsync();
             return getbook;
         }
 
-        public async Task<IEnumerable<UserBook>> getRenyedBooksbyUserId(int id)
+        public async Task<List<UserBook>> getRenyedBooksbyUserId(int id)
         {
            var getuser=await _Context.UserBooks.Include(x=>x.Book).Include(x=>x.User)
                 .AsNoTracking().Where(x=>x.UserId==id&&x.ReturnTime==null).ToListAsync();

@@ -14,7 +14,7 @@ namespace Book_Store.Services
             _categoryRepostory = categoryRepostory;
         }
 
-        public async Task<List<Category>> GetAllCategory()
+        public async Task<List<string>> GetAllCategory()
         {
             try
             {
@@ -30,7 +30,7 @@ namespace Book_Store.Services
             }
         }
 
-        public async Task<List<Category>> GetAllCategoryAndBook()
+        public async Task<List<GetCategory>> GetAllCategoryAndBook()
         {
             try
             {
@@ -64,7 +64,7 @@ namespace Book_Store.Services
             }
         }
 
-        public async Task<Category> GetCategoryByName(string name)
+        public async Task<GetCategory> GetCategoryByName(string name)
         {
             try
             {

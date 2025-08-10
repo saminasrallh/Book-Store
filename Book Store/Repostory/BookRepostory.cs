@@ -1,6 +1,7 @@
 ﻿using Book_Store.DBContext;
 using Book_Store.Entity;
 using Book_Store.IRepostry;
+using Book_Store.Model;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 
@@ -15,10 +16,22 @@ namespace Book_Store.Repostory
             _Context = context;
         }
      
-        public async Task<List<Book>> GetallBook()
+        public async Task<List<GetBookModel>> GetallBook()
         {
             var getbook = _Context.Books.AsNoTracking().Include(x => x.UserBook.Where(x => x.ReturnTime == null))
-            .Include(x => x.Auther).OrderBy(x => x.Title).ToList();
+            .Include(x => x.Auther).Include(x=>x.BookCategory).OrderBy(x => x.Title).Select(getbook=>new GetBookModel
+            {
+                Title =getbook.Title,
+                Description=getbook.Description,
+                Quantity = getbook.Quantity,
+                Price = getbook.Price,
+                Created=getbook.Created,
+                CreatedBy = getbook.CreatedBy,
+                UpdateBy=getbook.UpdateBy,
+                LastUpdated=getbook.LastUpdated,
+                BookCategory=getbook.BookCategory.Select(x=>x.Name).ToList(),
+                AutherName=getbook.Auther.FName,
+            }).ToList();
 
             return getbook;
         }
@@ -30,10 +43,24 @@ namespace Book_Store.Repostory
             return getbook;
         }
 
-        public async Task<Book> GetBookByName(string name)
+        public async Task<GetBookModel> GetBookByName(string name)
         {
             var getbook = await _Context.Books.Include(x => x.UserBook.Where(x => x.ReturnTime == null))
-                .AsNoTracking().FirstOrDefaultAsync(x => x.Title == name);
+                 .Include(x => x.Auther).Include(x => x.BookCategory)
+                .AsNoTracking().Select(getbook => new GetBookModel
+                {
+                    Title = getbook.Title,
+                    Description = getbook.Description,
+                    Quantity = getbook.Quantity,
+                    AvulebalQuantity = getbook.AvulebelQuantity,
+                    Price = getbook.Price,
+                    Created = getbook.Created,
+                    CreatedBy = getbook.CreatedBy,
+                    UpdateBy = getbook.UpdateBy,
+                    LastUpdated = getbook.LastUpdated,
+                    BookCategory = getbook.BookCategory.Select(x => x.Name).ToList(),
+                    AutherName = getbook.Auther.FName,
+                }).FirstOrDefaultAsync(x => x.Title == name);
             return getbook;
         }
 

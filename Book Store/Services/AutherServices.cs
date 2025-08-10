@@ -19,7 +19,7 @@ namespace Book_Store.Services
             _autherRepostory = autherRepostory;
         }
 
-        public async Task<List<Auther>> GetAuther()
+        public async Task<List<AutherModel>> GetAuther()
         {
           
             try {
@@ -49,7 +49,7 @@ namespace Book_Store.Services
                 throw new ApplicationException($" {ex.Message}");
             }
         }
-        public async Task<List<Auther>> GetAutherِAndBook()
+        public async Task<List<GetAutherModel>> GetAutherِAndBook()
         {
             try
             {
@@ -65,7 +65,7 @@ namespace Book_Store.Services
                 throw new ApplicationException($" {ex.Message}");
             }
         }
-        public async Task<Auther> GetAutherByName(string name)
+        public async Task<GetAutherModel> GetAutherByName(string name)
         {
            
             try

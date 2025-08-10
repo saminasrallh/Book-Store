@@ -14,14 +14,20 @@ namespace Book_Store.Repostory
         {
             _Context = context;
         }
-        public async Task<List<Category>> GetAllCategory()
+        public async Task<List<string>> GetAllCategory()
         {
-            var getCategories = await  _Context.Categories.AsNoTracking().ToListAsync();
+            var getCategories = await  _Context.Categories.AsNoTracking().Select(x=>x.Name).ToListAsync();
             return getCategories;
         }
-        public async Task<List<Category>> GetAllCategoryAndBook()
+        public async Task<List<GetCategory>> GetAllCategoryAndBook()
         {
-            var getCategoriesandbook = await _Context.Categories.Include(x=>x.Books).AsNoTracking().ToListAsync();
+            var getCategoriesandbook = await _Context.Categories.Include(x=>x.Books).AsNoTracking()
+                .Select(get=>new GetCategory
+                {
+                    Name = get.Name,
+                    Books=get.Books.Select(x=>x.Title).ToList(),
+
+                }).ToListAsync();
             return getCategoriesandbook;
         }
 
@@ -31,9 +37,15 @@ namespace Book_Store.Repostory
             return getCategories;
         }
 
-        public async Task<Category> GetCategoryByName(string name)
+        public async Task<GetCategory> GetCategoryByName(string name)
         {
-           var getCategories = await _Context.Categories.Include(x=>x.Books).AsNoTracking().FirstOrDefaultAsync(x => x.Name==name);
+           var getCategories = await _Context.Categories.Include(x=>x.Books).AsNoTracking()
+                .Select(getCategories=> new GetCategory
+                {
+                    Name = getCategories.Name,
+                    Books=getCategories.Books.Select(x=>x.Title).ToList()
+                })
+                .FirstOrDefaultAsync(x => x.Name==name);
             return getCategories;
         }
 

@@ -1,4 +1,5 @@
 ﻿using Book_Store.Entity;
+using Book_Store.Model;
 
 namespace Book_Store.IServices
 {
@@ -6,7 +7,7 @@ namespace Book_Store.IServices
     {
         Task<UserBook> GetById(int id);
 
-        Task<List<UserBook>> getallRenter();
+        Task<List<GetUserBookModel>> getallRenter();
         Task<List<UserBook>> getRenyedBooksbyUserId(int id);
         Task<List<UserBook>> getRenyedBooksbybookId(int id);
         Task<UserBook> create(int userid,int bookid);

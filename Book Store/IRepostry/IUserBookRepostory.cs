@@ -1,4 +1,5 @@
 ﻿using Book_Store.Entity;
+using Book_Store.Model;
 
 namespace Book_Store.IRepostry
 {
@@ -6,7 +7,7 @@ namespace Book_Store.IRepostry
     {
         Task<UserBook>GetById(int id);
         Task<UserBook> GetByIdUserbook(int id);
-        Task<List<UserBook>> getallRenter();
+        Task<List<GetUserBookModel>> getallRenter();
         Task<List< UserBook>> getRenyedBooksbyUserId (int id);
        Task<List<UserBook>> getRenyedBooksbybookId (int id);
        Task <UserBook> create (UserBook userBook,Book book);

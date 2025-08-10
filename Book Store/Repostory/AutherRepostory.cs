@@ -15,15 +15,29 @@ namespace Book_Store.Repostory
             _dbContext = dbContext;
         }
 
-        public async Task<List<Auther>> GetAutherِAndBook()
+        public async Task<List<GetAutherModel>> GetAutherِAndBook()
         {
-            List<Auther> getauther=await _dbContext.Authers.Include(x=>x.books).AsNoTracking().ToListAsync();
+            var getauther=await _dbContext.Authers.Include(x=>x.books).AsNoTracking().Select(get=>new GetAutherModel
+            {
+                LName=get.LName,
+                FName=get.FName,
+                BirthDay=get.BirthDay,
+                Country=get.Country,
+                books=get.books.Select(bookname=>bookname.Title).ToList(),
+                
+            }).ToListAsync();
             return getauther;
         }
 
-        public async Task<List<Auther>> GetAuther()
+        public async Task<List<AutherModel>> GetAuther()
         {
-            var getauther = await _dbContext.Authers.AsNoTracking().ToListAsync();
+            var getauther = await _dbContext.Authers.AsNoTracking().Select(get => new AutherModel
+            {
+                FName = get.FName,
+                LName = get.LName,
+                Country = get.Country,
+                BirthDay = get.BirthDay,
+            }).ToListAsync();
             return getauther;
         }
 
@@ -35,9 +49,17 @@ namespace Book_Store.Repostory
             return getauther;
         }
 
-        public async Task<Auther> GetAutherByName(string name)
+        public async Task<GetAutherModel> GetAutherByName(string name)
         {
-            var getauther = await _dbContext.Authers.Include(x => x.books).AsNoTracking()
+            var getauther = await _dbContext.Authers.Include(x => x.books).AsNoTracking().Select(get => new GetAutherModel
+            {
+                LName = get.LName,
+                FName = get.FName,
+                BirthDay = get.BirthDay,
+                Country = get.Country,
+                books = get.books.Select(bookname => bookname.Title).ToList(),
+
+            })
                 .FirstOrDefaultAsync(x => x.FName == name || x.LName == name);
             return getauther;
         }

@@ -5,11 +5,11 @@ namespace Book_Store.IRepostry
 {
     public interface ICategoryRepostory
     {
-         Task<List<Category>> GetAllCategory();
-        Task<List<Category>> GetAllCategoryAndBook();
+         Task<List<string>> GetAllCategory();
+        Task<List<GetCategory>> GetAllCategoryAndBook();
 
         Task<Category> GetCategoryById(int id);
-        Task<Category> GetCategoryByName(string name);
+        Task<GetCategory> GetCategoryByName(string name);
         Task<Category> CreateCategory(Category category);
         Task<Category> UpdateCategory(Category category);
         Task<Category> DeleteCategory(Category category);

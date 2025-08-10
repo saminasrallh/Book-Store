@@ -6,14 +6,14 @@ namespace Book_Store.IRepostry
 {
     public interface IUserRepostry
     {
-        Task <List<Users>> GetUsers ();
+        Task <List<GetUserModel>> GetUsers ();
         Task<Users> GetUsersByID(int id);
 
         Task<Users> CreateUser(Users user);
         Task<Users> UpdateUser(Users user);
         Task<Users> DeleteUser(Users users);
        
-        Task<List<Users>> GetUsersByName(string name);
+        Task<List<GetUserModel>> GetUsersByName(string name);
         Task <IEnumerable> GetToken(string name, string password);
         Task< numberbookfromUser> numberbookfromUser (int id);
 

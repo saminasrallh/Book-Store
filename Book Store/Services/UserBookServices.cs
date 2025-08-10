@@ -1,6 +1,7 @@
 ﻿using Book_Store.Entity;
 using Book_Store.IRepostry;
 using Book_Store.IServices;
+using Book_Store.Model;
 using System.Net;
 
 namespace Book_Store.Services
@@ -19,7 +20,7 @@ namespace Book_Store.Services
             _userRepostry = userRepostry;
         }
 
-        public async Task<List<UserBook>> getallRenter()
+        public async Task<List<GetUserBookModel>> getallRenter()
         {
             try
             {

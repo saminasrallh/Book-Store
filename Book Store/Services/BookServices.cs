@@ -18,7 +18,7 @@ namespace Book_Store.Services
             _bookRepostory = bookRepostory;
             _autherRepostory = autherRepostory;
         }
-        public async Task<List<Book>> GetallBook()
+        public async Task<List<GetBookModel>> GetallBook()
         {
             try
             {
@@ -51,7 +51,7 @@ namespace Book_Store.Services
             }
             }
 
-        public async Task<Book> GetBookByName(string name)
+        public async Task<GetBookModel> GetBookByName(string name)
         {
             try
             {

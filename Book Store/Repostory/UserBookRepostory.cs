@@ -1,6 +1,7 @@
 ﻿using Book_Store.DBContext;
 using Book_Store.Entity;
 using Book_Store.IRepostry;
+using Book_Store.Model;
 using Microsoft.EntityFrameworkCore;
 
 namespace Book_Store.Repostory
@@ -26,10 +27,17 @@ namespace Book_Store.Repostory
             var getusarbook = await _Context.UserBooks.AsNoTracking().FirstOrDefaultAsync(x=>x.Id==id);
             return getusarbook;
         }
-        public async Task<List<UserBook>> getallRenter()
+        public async Task<List<GetUserBookModel>> getallRenter()
         {
         var getusarbook = await _Context.UserBooks.Include(x=>x.Book).Include(x=>x.User)
-                .AsNoTracking().Where(x=>x.ReturnTime==null).ToListAsync();
+                .AsNoTracking().Where(x=>x.ReturnTime==null).Select(get=>new GetUserBookModel
+                {
+                    UserName=get.User.FName,
+                    BookName=get.Book.Title,
+                    RentalTime=get.RentalTime,
+                    deadline=get.deadline,
+                    ReturnTime=get.ReturnTime,
+                }).ToListAsync();
             return getusarbook;
         }
 

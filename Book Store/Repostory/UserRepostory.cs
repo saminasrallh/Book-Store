@@ -26,9 +26,21 @@ namespace Book_Store.Repostory
             _config = config;
             _Context = appDBContext;
         }
-        public async Task<List<Users>> GetUsers()
+        public async Task<List<GetUserModel>> GetUsers()
         {
-            var user = await _Context.Users.AsNoTracking().OrderBy(x => x.FName ).ToListAsync();
+            var user = await _Context.Users.AsNoTracking().Include(x=>x.UserBooks)
+                .Select(get => new GetUserModel
+                {
+                    FName = get.FName,
+                    LName = get.LName,
+                    phoneNumber=get.phoneNumber,
+                    CreatedDate = DateTime.UtcNow,
+                    UserName = get.UserName,
+                    Password= get.Password,
+                    Email= get.Email,
+                   
+                })
+                .ToListAsync();
 
             return (user);
         }
@@ -59,9 +71,20 @@ namespace Book_Store.Repostory
             return user;
         }
 
-        public async Task<List<Users>> GetUsersByName(string name)
+        public async Task<List<GetUserModel>> GetUsersByName(string name)
         {
-            var user = await _Context.Users.AsNoTracking().Where(x=>x.FName==name ||x.LName==name).ToListAsync();
+            var user = await _Context.Users.AsNoTracking().Where(x=>x.FName==name ||x.LName==name)
+                .Include(x=>x.UserBooks).Select(get => new GetUserModel
+                {
+                    FName = get.FName,
+                    LName = get.LName,
+                    phoneNumber = get.phoneNumber,
+                    CreatedDate = DateTime.UtcNow,
+                    UserName = get.UserName,
+                    Password = get.Password,
+                    Email = get.Email,
+                 
+                }).ToListAsync();
 
             return (user);
         }

@@ -9,8 +9,8 @@ namespace Book_Store.IServices
         Task<List<GetUserModel>> GetUsers();
         Task<Users> GetUsersByID(int id);
 
-        Task<Users> CreateUser(Usermodel user);
-        Task<Users> UpdateUser(int id,Usermodel user);
+        Task<Users> CreateUser(CreateUserModel user);
+        Task<Users> UpdateUser(int id,CreateUserModel user);
         Task<Users> DeleteUser(int id);
 
         Task<List<GetUserModel>> GetUsersByName(string name);

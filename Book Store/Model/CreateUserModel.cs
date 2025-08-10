@@ -1,6 +1,6 @@
 ﻿namespace Book_Store.Model
 {
-    public class Usermodel
+    public class CreateUserModel
     {
         public string FName { get; set; }
         public string LName { get; set; }

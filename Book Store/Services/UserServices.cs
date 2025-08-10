@@ -68,7 +68,7 @@ namespace Book_Store.Services
                 throw new ApplicationException($" {ex.Message}");
             }
             }
-        public async Task<Users> CreateUser(Usermodel user)
+        public async Task<Users> CreateUser(CreateUserModel user)
         {
             try
             {
@@ -174,7 +174,7 @@ namespace Book_Store.Services
 
             }
 
-        public async Task<Users> UpdateUser(int id, Usermodel users)
+        public async Task<Users> UpdateUser(int id, CreateUserModel users)
         {
             try
             {

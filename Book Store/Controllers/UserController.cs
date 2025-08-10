@@ -57,7 +57,7 @@ namespace Book_Store.Controllers
         }
         [HttpPost("CreateUser")]
         [AllowAnonymous]
-        public async Task <IActionResult>CreateUser(Usermodel users)
+        public async Task <IActionResult>CreateUser(CreateUserModel users)
         {
             
           var create=await  _userServices.CreateUser(users);
@@ -76,7 +76,7 @@ namespace Book_Store.Controllers
 
         [HttpPut("UpdateUser")]
        // [Authorize(Roles="admin")]
-        public async Task<IActionResult>Update(int id,Usermodel users)
+        public async Task<IActionResult>Update(int id,CreateUserModel users)
 
         {
           var update=await  _userServices.UpdateUser(id,users);

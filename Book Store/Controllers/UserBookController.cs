@@ -29,17 +29,17 @@ namespace Book_Store.Controllers
         [HttpGet("getRenyedBooksbyUserId")]
         public async Task <IActionResult> getRenyedBooksbyUserId(int id)
         {
-           var get= await _userBookServices.getRenyedBooksbyUserId(id);
+           var getbyuser= await _userBookServices.getRenyedBooksbyUserId(id);
        
-            return Ok(get);
+            return Ok(getbyuser);
         }
         [HttpGet("getRenyedBooksbybookId")]
         public async Task <IActionResult> getRenyedBooksbybookId(int id)
         {
 
-           var get=await _userBookServices.getRenyedBooksbybookId(id);
+           var getbybook=await _userBookServices.getRenyedBooksbybookId(id);
         
-            return Ok(get);
+            return Ok(getbybook);
         }
         [HttpPost("RentelBook")]
         

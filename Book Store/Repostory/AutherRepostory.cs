@@ -17,35 +17,35 @@ namespace Book_Store.Repostory
 
         public async Task<List<Auther>> GetAutherِAndBook()
         {
-            List<Auther> get=await _dbContext.Authers.Include(x=>x.books).AsNoTracking().ToListAsync();
-            return get;
+            List<Auther> getauther=await _dbContext.Authers.Include(x=>x.books).AsNoTracking().ToListAsync();
+            return getauther;
         }
 
         public async Task<List<Auther>> GetAuther()
         {
-            var get = await _dbContext.Authers.AsNoTracking().ToListAsync();
-            return get;
+            var getauther = await _dbContext.Authers.AsNoTracking().ToListAsync();
+            return getauther;
         }
 
 
         public async Task<Auther> GetAutherByID(int id)
         {
-            var get = await _dbContext.Authers.Include(x=>x.books).AsNoTracking().FirstOrDefaultAsync(x=>x.Id==id);
+            var getauther = await _dbContext.Authers.Include(x=>x.books).AsNoTracking().FirstOrDefaultAsync(x=>x.Id==id);
           
-            return get;
+            return getauther;
         }
 
         public async Task<Auther> GetAutherByName(string name)
         {
-            var get = await _dbContext.Authers.Include(x => x.books).AsNoTracking()
+            var getauther = await _dbContext.Authers.Include(x => x.books).AsNoTracking()
                 .FirstOrDefaultAsync(x => x.FName == name || x.LName == name);
-            return get;
+            return getauther;
         }
 
         public async Task<Auther> CreateAuther(Auther auther)
         {
            await _dbContext.Authers.AddAsync(auther);
-            _dbContext.SaveChanges();
+           await _dbContext.SaveChangesAsync();
             return auther;
         }
 
@@ -67,13 +67,13 @@ namespace Book_Store.Repostory
         public async Task<NumberBook> numberbookfromauther(int id)
         {
 
-            var number = _dbContext.Authers.Where(x=>x.Id==id).Select(num => new NumberBook
+            var numberbookfromauther = _dbContext.Authers.Where(x=>x.Id==id).Select(num => new NumberBook
             {
                 Name = num.FName,
                 Count = num.books.Count,
             }).FirstOrDefault();
             
-            return number;
+            return numberbookfromauther;
         }
 
        

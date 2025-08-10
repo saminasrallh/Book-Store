@@ -17,15 +17,20 @@ namespace Book_Store.Repostory
         }
         public async Task<UserBook> GetById(int id)
         {
-            var get=await _Context.UserBooks.Include(x=>x.Book).Include(x=>x.User)
+            var getusarbook=await _Context.UserBooks.Include(x=>x.Book).Include(x=>x.User)
                 .AsNoTracking().FirstOrDefaultAsync(x=>x.Id==id);
-            return get;
+            return getusarbook;
+        }
+        public async Task<UserBook>GetByIdUserbook(int id)
+        {
+            var getusarbook = await _Context.UserBooks.AsNoTracking().FirstOrDefaultAsync(x=>x.Id==id);
+            return getusarbook;
         }
         public async Task<List<UserBook>> getallRenter()
         {
-        var get=await _Context.UserBooks.Include(x=>x.Book).Include(x=>x.User)
+        var getusarbook = await _Context.UserBooks.Include(x=>x.Book).Include(x=>x.User)
                 .AsNoTracking().Where(x=>x.ReturnTime==null).ToListAsync();
-            return get;
+            return getusarbook;
         }
 
         public async Task<List<UserBook>> getRenyedBooksbybookId(int id)
@@ -56,15 +61,15 @@ namespace Book_Store.Repostory
 
         public async Task<UserBook> RetarnBook(UserBook userBook)
         {
-            userBook.Book = null;
+           
             _Context.UserBooks.Update(userBook);
             await _Context.SaveChangesAsync();
 
             return userBook;
         }
-        public async Task<Book>UpdaetQuantity(Book book)
+        public async Task<Book>UpdateQuantity(Book book)
         {
-            book.UserBook = null;
+           
             _Context.Books.Update(book);
            await _Context.SaveChangesAsync();
 

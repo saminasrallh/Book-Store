@@ -25,8 +25,7 @@ namespace Book_Store.Repostory
 
         public async Task<Book> GetBookByID(int id)
         {
-            var getbook = await _Context.Books.Include(x => x.UserBook.Where(x => x.ReturnTime == null))
-                 .AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
+            var getbook = await _Context.Books.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
 
             return getbook;
         }
@@ -41,7 +40,7 @@ namespace Book_Store.Repostory
         public async Task<Book> CreateBook(Book book)
         {
             await _Context.AddAsync(book);
-            _Context.SaveChanges();
+            await _Context.SaveChangesAsync();
             return book;
         }
 
@@ -55,7 +54,7 @@ namespace Book_Store.Repostory
         public async Task<Book> UpdateBook(Book book)
         {
             _Context.Books.Update(book);
-            _Context.SaveChanges();
+            await _Context.SaveChangesAsync();
             return book;
         }
 

@@ -112,20 +112,20 @@ namespace Book_Store.Repostory
         public async Task<numberbookfromUser> numberbookfromUser(int id)
         {
 
-            var number = new numberbookfromUser();
+            var numberofbook = new numberbookfromUser();
             var x = await _Context.Users.Where(x => x.Id == id).FirstOrDefaultAsync();
             if (x == null)
             {
-                return number=null;
+                return numberofbook = null;
             }
 
-            number.Fname = x.FName;
-            number.Lname = x.LName;
-            number.CountUuser = _Context.UserBooks.Where(x => x.ReturnTime ==null&&x.UserId==id).Count();
+            numberofbook.Fname = x.FName;
+            numberofbook.Lname = x.LName;
+            numberofbook.CountUuser = _Context.UserBooks.Where(x => x.ReturnTime ==null&&x.UserId==id).Count();
                
 
 
-            return number;
+            return numberofbook;
         }
 
     }

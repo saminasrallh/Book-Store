@@ -16,25 +16,25 @@ namespace Book_Store.Repostory
         }
         public async Task<List<Category>> GetAllCategory()
         {
-            var get=await  _Context.Categories.AsNoTracking().ToListAsync();
-            return get;
+            var getCategories = await  _Context.Categories.AsNoTracking().ToListAsync();
+            return getCategories;
         }
         public async Task<List<Category>> GetAllCategoryAndBook()
         {
-            var get = await _Context.Categories.Include(x=>x.Books).AsNoTracking().ToListAsync();
-            return get;
+            var getCategoriesandbook = await _Context.Categories.Include(x=>x.Books).AsNoTracking().ToListAsync();
+            return getCategoriesandbook;
         }
 
         public async Task<Category> GetCategoryById(int id)
         {
-           var get =await _Context.Categories.Include(x=>x.Books).AsNoTracking().FirstOrDefaultAsync(x=>x.Id==id);
-            return get;
+           var getCategories = await _Context.Categories.Include(x=>x.Books).AsNoTracking().FirstOrDefaultAsync(x=>x.Id==id);
+            return getCategories;
         }
 
         public async Task<Category> GetCategoryByName(string name)
         {
-           var get =await _Context.Categories.Include(x=>x.Books).AsNoTracking().FirstOrDefaultAsync(x => x.Name==name);
-            return get;
+           var getCategories = await _Context.Categories.Include(x=>x.Books).AsNoTracking().FirstOrDefaultAsync(x => x.Name==name);
+            return getCategories;
         }
 
         public async Task<Category> CreateCategory(Category category)

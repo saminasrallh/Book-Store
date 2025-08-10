@@ -23,12 +23,12 @@ namespace Book_Store.Services
         {
             try
             {
-                var get = await _userBookRepostory.getallRenter();
-                if(get == null)
+                var getallRenter = await _userBookRepostory.getallRenter();
+                if(getallRenter == null)
                 {
                     throw new ApplicationException($"Error: {"No Book Rental"}");
                 }
-                return (get);
+                return (getallRenter);
             }
             catch (Exception ex)
             {
@@ -39,12 +39,12 @@ namespace Book_Store.Services
         {
             try
             {
-                var get = await _userBookRepostory.getRenyedBooksbyUserId(id);
-                if (get == null)
+                var getuser = await _userBookRepostory.getRenyedBooksbyUserId(id);
+                if (getuser == null)
                 {
                     throw new ApplicationException($"Error: {"The User Not Found"}");
                 }
-                return get;
+                return getuser;
             }
             catch (Exception ex)
             {
@@ -56,12 +56,12 @@ namespace Book_Store.Services
         {
             try
             {
-                var get = await _userBookRepostory.getRenyedBooksbybookId(id);
-                if (get == null)
+                var getbook = await _userBookRepostory.getRenyedBooksbybookId(id);
+                if (getbook == null)
                 {
                     throw new ApplicationException($"Error: {"The Book Not Found"}");
                 }
-                return get;
+                return getbook;
             }
             catch (Exception ex)
             {
@@ -114,12 +114,12 @@ namespace Book_Store.Services
         {
             try
             {
-                var getbyid = await _userBookRepostory.GetById(id);
-                if (getbyid == null)
+                var getusrebook = await _userBookRepostory.GetById(id);
+                if (getusrebook == null)
                 {
                     throw new ApplicationException($"Error: {"The Book Not Found"}");
                 }
-                return getbyid;
+                return getusrebook;
             }
             catch (Exception ex)
             {
@@ -131,20 +131,20 @@ namespace Book_Store.Services
         {
             try
             {
-                var get = await _userBookRepostory.GetById(id);
-                if(get.ReturnTime != null)
+                var getuserbook = await _userBookRepostory.GetByIdUserbook(id);
+                if(getuserbook.ReturnTime != null)
                 {
                     throw new ApplicationException($"Error: {"The Book its Retarn"}");
                 }
 
-                var getbook = await _bookRepostory.GetBookByID(get.BookId);
+                var getbook = await _bookRepostory.GetBookByID(getuserbook.BookId);
 
-                get.ReturnTime = DateTime.Now;
+                getuserbook.ReturnTime = DateTime.Now;
                 getbook.AvulebelQuantity = getbook.AvulebelQuantity + 1;
-                await _userBookRepostory.RetarnBook(get);
-                await _userBookRepostory.UpdaetQuantity(getbook);
+                await _userBookRepostory.RetarnBook(getuserbook);
+                await _userBookRepostory.UpdateQuantity(getbook);
 
-                return (get);
+                return (getuserbook);
 
             }
             catch (Exception ex)

@@ -95,41 +95,17 @@ namespace Book_Store.Repostory
             _Context.SaveChanges();
             return user;
         }
-        public async Task<IEnumerable> GetToken(string userName, string password)
+        public async Task<Users> GetToken(string userName, string password)
         {
             var user = await _Context.Users
                  .Where(x => x.UserName == userName && x.Password == password)
                  .AsNoTracking()
                  .Include(x => x.Roles)
                  .FirstOrDefaultAsync();
-            if (user == null)
-                return ("notfound");
+                  return user;
+           
 
-            var claims = new List<Claim>
-                        {
-                            new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-                            new Claim(ClaimTypes.Name, user.UserName),
-                            new Claim(ClaimTypes.Email, user.Email)
-                        };
-
-            foreach (var role in user.Roles)
-            {
-                claims.Add(new Claim(ClaimTypes.Role, role.Name));
-            }
-
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
-            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-
-            var token = new JwtSecurityToken(
-                issuer: _config["Jwt:Issuer"],
-                audience: _config["Jwt:Audience"],
-                claims: claims,
-                expires: DateTime.UtcNow.AddHours(1),
-                signingCredentials: creds);
-
-            var tokenres = new JwtSecurityTokenHandler().WriteToken(token);
-
-            return (tokenres);
+           
         }
    
         public async Task<numberbookfromUser> numberbookfromUser(int id)

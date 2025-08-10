@@ -14,7 +14,7 @@ namespace Book_Store.IRepostry
         Task<Users> DeleteUser(Users users);
        
         Task<List<GetUserModel>> GetUsersByName(string name);
-        Task <IEnumerable> GetToken(string name, string password);
+        Task <Users> GetToken(string name, string password);
         Task< numberbookfromUser> numberbookfromUser (int id);
 
     }

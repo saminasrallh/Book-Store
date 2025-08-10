@@ -94,8 +94,8 @@ namespace Book_Store.Controllers
         [HttpGet("numberbookfromUser")]
         public async Task<IActionResult> numberbookfromUser(int id)
         {
-           var x= await _userServices.numberbookfromUser(id);
-            return Ok(x);
+           var numberbookfromUser= await _userServices.numberbookfromUser(id);
+            return Ok(numberbookfromUser);
         }
 
     }

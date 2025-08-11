@@ -3,6 +3,7 @@ using Book_Store.Entity;
 using Book_Store.IRepostry;
 using Book_Store.Model;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Migrations.Operations;
 
 namespace Book_Store.Repostory
 {
@@ -27,6 +28,7 @@ namespace Book_Store.Repostory
                 
             }).ToListAsync();
             return getauther;
+           
         }
 
         public async Task<List<AutherModel>> GetAuther()

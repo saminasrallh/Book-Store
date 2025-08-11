@@ -18,12 +18,12 @@ namespace Book_Store.Repostory
     {
 
         private readonly AppDBContext _Context;
-        private readonly IConfiguration _config;
+       // private readonly IConfiguration _config;
 
         public UserRepostory(AppDBContext appDBContext, IConfiguration config)
         {
           
-            _config = config;
+           // _config = config;
             _Context = appDBContext;
         }
         public async Task<List<GetUserModel>> GetUsers()
@@ -65,7 +65,7 @@ namespace Book_Store.Repostory
 
         public async Task<Users> GetUsersByID(int id)
         {
-            var user = await _Context.Users.FirstOrDefaultAsync(x => x.Id == id);
+            var user = await _Context.Users.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
 
           
             return user;
@@ -112,14 +112,14 @@ namespace Book_Store.Repostory
         {
 
             var numberofbook = new numberbookfromUser();
-            var x = await _Context.Users.Where(x => x.Id == id).FirstOrDefaultAsync();
-            if (x == null)
+            var getuser = await _Context.Users.AsNoTracking().Where(x => x.Id == id).FirstOrDefaultAsync();
+            if (getuser == null)
             {
                 return numberofbook = null;
             }
 
-            numberofbook.Fname = x.FName;
-            numberofbook.Lname = x.LName;
+            numberofbook.Fname = getuser.FName;
+            numberofbook.Lname = getuser.LName;
             numberofbook.CountUuser = _Context.UserBooks.Where(x => x.ReturnTime ==null&&x.UserId==id).Count();
                
 

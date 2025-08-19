@@ -16,7 +16,7 @@ namespace Book_Store.middleware
         public async Task InvokeAsync(HttpContext httpContext)
         {
             var hour = DateTime.Now.Hour;
-            if (hour >= 22 || hour < 21)
+            if (hour >= 22 || hour < 6)
             {
                 //httpContext.Response.StatusCode = 403;
                 await httpContext.Response.WriteAsync("The site is closed");

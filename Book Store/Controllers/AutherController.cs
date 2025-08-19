@@ -19,7 +19,7 @@ namespace Book_Store.Controllers
         }
 
         [HttpGet("getallAuther")]
-        public async Task<IActionResult> GetallAuther()
+        public async Task<IActionResult> GetallAuth()
         {
             var getAuther = await _autherServices.GetAuther();
             return Ok(getAuther);
